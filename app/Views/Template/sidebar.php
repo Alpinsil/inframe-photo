@@ -19,6 +19,8 @@ $data = [
   ['name' => 'List Order', 'icon' => 'ni ni-calendar-grid-58 text-warning', 'link' => 'list-order'],
   ['name' => 'Services', 'icon' => 'ni ni-single-copy-04 text-primary', 'link' => 'services'],
   ['name' => 'FAQ', 'icon' => 'fa-solid fa-circle-question text-primary', 'link' => 'faq-admin'],
+  ['name' => 'Tags', 'icon' => 'fa-solid fa-tag text-warning', 'link' => 'tags-admin'],
+  ['name' => 'Portfolio', 'icon' => 'fa-solid fa-briefcase text-warning', 'link' => 'portfolio-admin'],
 
 ];
 ?>
@@ -76,11 +78,9 @@ $data = [
               <span class="nav-link-text ms-1"><?= $key['name']; ?></span>
             </a>
           </li>
-
         <?php
         }
         ?>
-
       </ul>
     </div>
 
@@ -117,12 +117,41 @@ $data = [
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+
+
+
+
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-white p-0 dropdown-toggle " id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none"><?= session()->get('user_name'); ?></span>
+                <span class="d-sm-inline d-none text-white"><?= session()->get('user_name'); ?></span>
+
               </a>
+              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="/profile">
+                    Profile
+                  </a>
+                </li>
+
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="/">
+                    Home
+                  </a>
+                </li>
+
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="/logout">
+                    Logout
+                  </a>
+                </li>
+
+              </ul>
             </li>
+
+
+
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
@@ -136,11 +165,25 @@ $data = [
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
+    <div class="py-4">
       <?= $this->renderSection('content') ?>
     </div>
   </main>
 
+
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+
+    $('#iconNavbarSidenav').on('click', (e) => {
+      $('body').toggleClass('g-sidenav-pinned');
+    })
+  </script>
 
   <!--   Core JS Files   -->
   <script src="assets/js/core/popper.min.js"></script>

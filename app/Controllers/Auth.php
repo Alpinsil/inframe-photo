@@ -99,7 +99,12 @@ class Auth extends BaseController
     }
 
     $getData = $this->userModel->search($nameOrEmail);
+
+
+    // validation
+
     if ($getData && password_verify($password, $getData['password'])) {
+      // if ($getData && $password == $getData['password']) {
       session()->set('role', $getData['role']);
       session()->set('user_id', $getData['id']);
       session()->set('user_name', $getData['name']);

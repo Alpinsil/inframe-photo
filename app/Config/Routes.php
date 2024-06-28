@@ -20,7 +20,30 @@ $routes->get('/logout', 'Auth::logout');
 $routes->get('/dashboard', 'Admin\Dashboard::index');
 $routes->get('/list-order', 'Admin\listOrder::index');
 
+// faq
 $routes->get('/faq-admin', 'Admin\Faq::index');
 $routes->post('/faq-admin', 'Admin\Faq::create');
 $routes->put('/faq-admin', 'Admin\Faq::update');
 $routes->delete('/faq-admin', 'Admin\Faq::delete');
+
+// services
+$routes->get('/services', 'Admin\Services::index');
+$routes->post('/services', 'Admin\Services::create');
+$routes->put('/services', 'Admin\Services::update');
+$routes->delete('/services', 'Admin\Services::delete');
+
+// tags
+$routes->get('/tags-admin', 'Admin\Tags::index');
+$routes->post('/tags-admin', 'Admin\Tags::create');
+$routes->put('/tags-admin', 'Admin\Tags::update');
+$routes->delete('/tags-admin', 'Admin\Tags::delete');
+
+// portfolio
+$routes->get('/portfolio-admin', 'Admin\Portfolio::index');
+$routes->post('/portfolio-admin', 'Admin\Portfolio::create');
+$routes->put('/portfolio-admin', 'Admin\Portfolio::update');
+$routes->delete('/portfolio-admin', 'Admin\Portfolio::delete');
+
+// profile
+$routes->get('/profile', 'profile::index');
+$routes->put('/profile', 'profile::update');

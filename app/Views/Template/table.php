@@ -13,8 +13,8 @@
 </style>
 
 
-<?php if (session()->getFlashdata('faq_message')) {
-  $msg =  session()->getFlashdata('faq_message');
+<?php if (session()->getFlashdata('message')) {
+  $msg =  session()->getFlashdata('message');
 ?>
   <div class="alert alert-<?= $msg[1] ?> alert-dismissible fade show" role="alert">
     <div class=" text-white d-flex justify-content-center"> <strong><?= $msg[0] ?></strong>
@@ -29,10 +29,11 @@
 } ?>
 
 
-<button type="button" class="btn btn-primary btn-simple p-2 w-20" data-bs-toggle="modal" data-bs-target="#modal-tambah">
+<button type="button" class="btn btn-primary btn-simple p-2 w-lg-20" data-bs-toggle="modal" data-bs-target="#modal-tambah">
   <?= $modal_title['tambah']; ?>
 </button>
-<div class=" table-responsive">
+
+<div class="table-responsive">
   <table id="example" class="display table align-items-center mb-0" style="width:100%">
     <thead>
       <tr>
@@ -50,13 +51,22 @@
       foreach ($dataTables  as $data) { ?>
         <tr>
           <td class="text-start text-center"><?= $no; ?></td>
-          <?php foreach ($rows as $row) { ?>
-            <td class="text-wrap"><?= $data[$row]; ?></td>
+          <?php foreach ($rows as $row) {
+            if (isset($row[1]) && $row[1] == 'image') { ?>
+              <div class="d-flex justify-content-center mx-auto">
+                <td class="">
+                  <img class="img-thumbnail" width="100" height="100" alt="<?= $data[$row[0]]; ?>" src="assets/portfolio/<?= $data[$row[0]]; ?>">
+                </td>
+              </div>
+            <?php } else { ?>
+              <td class="text-wrap"><?= $data[$row]; ?></td>
+            <?php }
+            ?>
           <?php } ?>
-          <td class="d-flex justify-content-center gap-4">
-            <?php if ($btn_chat) { ?>
-              <a href="<?= $btn_chat; ?>" type="button" class="btn btn-warning btn-simple p-2" data-bs-toggle="modal" data-bs-target="#modal-edit<?= $data['id']; ?>">
-                chat
+          <td class="">
+            <?php if ($btn_link) { ?>
+              <a href="<?= $btn_link; ?>/<?= $data['id']; ?>" type="button" class="btn btn-warning btn-simple p-2">
+                Edit
               </a>
             <?php } else { ?>
               <button type="button" class="btn btn-warning btn-simple p-2" data-bs-toggle="modal" data-bs-target="#modal-edit<?= $data['id']; ?>">
@@ -79,17 +89,38 @@
                     <h3 class="font-weight-bolder text-info text-gradient"><?= $modal_title['edit']; ?></h3>
                   </div>
                   <div class="card-body">
-                    <form role="form text-left" action="" method="POST">
+                    <form role="form text-left" action="" method="POST" enctype="multipart/form-data">
+                      <?= csrf_field() ?>
                       <input type="hidden" name="_method" value="PUT">
                       <input type="hidden" name="id" value="<?= $data['id']; ?>">
+
+
                       <?php foreach ($modal_field as $row) {
-                        $name = $row['name'];
+                        $name =  $row['name'];
+                        $label =  ucfirst(str_replace(["_", 'id'], " ", $row['name']));
                       ?>
-                        <label><?= $name; ?></label>
+                        <label> <?= $label; ?> </label>
                         <div class="input-group mb-3">
-                          <input type="<?= empty($row['type']) ? 'text' : $row['type'] ?>" class="form-control" name="<?= $name; ?>" value="<?= $data[$name]; ?>">
+                          <?php if (!empty($row['type']) && $row['type'] == 'textarea') { ?>
+                            <textarea type="<?= empty($row['type']) ? 'text' : $row['type'] ?>" rows="8" cols="50" class="form-control" name="<?= $name; ?>"><?= $data[$name]; ?></textarea>
+                          <?php } elseif (!empty($row['type']) && $row['type'] == 'select') {
+                          ?>
+                            <select class="form-control" name="<?= $name; ?>" value="<?= $data[$name]; ?>">
+                              <?php foreach ($row['options'] as $key) {
+                              ?>
+                                <option <?= $key['name'] == $data[$name] ? 'selected' : '' ?> value="<?= $key['id']; ?>"><?= $key['name']; ?></option>
+                              <?php } ?>
+                            </select>
+                            <?php } else {
+                            if (!empty($row['type']) && $row['type'] == 'file') { ?>
+                              <input type="hidden" name="path" value="<?= $data[$name]; ?>">
+                            <?php }
+                            ?>
+                            <input type="<?= empty($row['type']) ? 'text' : $row['type'] ?>" class="form-control" name="<?= $name; ?>" value="<?= $data[$name]; ?>">
+                          <?php } ?>
                         </div>
                       <?php } ?>
+
 
                       <div class="text-center">
                         <button type="submit" class="btn btn-sm bg-success text-white">Update</button>
@@ -120,6 +151,14 @@
                 <form role="form text-left" action="" method="POST">
                   <input type="hidden" name="_method" value="DELETE">
                   <input type="hidden" name="id" value="<?= $data['id']; ?>">
+                  <?php
+                  foreach ($rows as $row) {
+
+                    if (isset($row[1]) && $row[1] == 'image') { ?>
+                      <input type="hidden" name="path" value="assets/portfolio/<?= $data[$row[0]]; ?>">
+                  <?php }
+                  }
+                  ?>
                   <button type="submit" class="btn bg-gradient-primary">Delete</button>
                 </form>
                 <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
@@ -144,15 +183,31 @@
             <h3 class="font-weight-bolder text-info text-gradient"><?= $modal_title['tambah']; ?></h3>
           </div>
           <div class="card-body">
-            <form role="form text-left" action="" method="POST">
+            <form role="form text-left" action="" method="POST" enctype="multipart/form-data">
+              <?= csrf_field() ?>
+
               <?php foreach ($modal_field as $row) {
-                $name = $row['name'];
+                $name =  $row['name'];
+                $label =  ucfirst(str_replace(["_", 'id'], " ", $row['name']));
               ?>
-                <label><?= $name; ?></label>
+                <label> <?= $label; ?> </label>
                 <div class="input-group mb-3">
-                  <input type="<?= empty($row['type']) ? 'text' : $row['type'] ?>" class="form-control" name="<?= $name; ?>">
+                  <?php if (!empty($row['type']) && $row['type'] == 'textarea') { ?>
+                    <textarea type="<?= empty($row['type']) ? 'text' : $row['type'] ?>" rows="8" cols="50" class="form-control" name="<?= $name; ?>"></textarea>
+                  <?php } elseif (!empty($row['type']) && $row['type'] == 'select') {
+                  ?>
+                    <select class="form-control" name="<?= $name; ?>">
+                      <?php foreach ($row['options'] as $key) { ?>
+                        <option value="<?= $key['id']; ?>"><?= $key['name']; ?></option>
+                      <?php } ?>
+                    </select>
+                  <?php } else { ?>
+                    <input type="<?= empty($row['type']) ? 'text' : $row['type'] ?>" class="form-control" name="<?= $name; ?>">
+                  <?php } ?>
                 </div>
               <?php } ?>
+
+
               <div class="text-center">
                 <button type="submit" class="btn btn-sm bg-success text-white">Tambah</button>
                 <button type="button" class="btn btn-sm bg-secondary text-white" data-bs-dismiss="modal">Close</button>

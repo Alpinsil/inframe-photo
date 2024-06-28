@@ -3,14 +3,14 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\FaqModel;
+use App\Models\TagsModel;
 
-class Faq extends BaseController
+class Tags extends BaseController
 {
-  protected $faq;
+  protected $tags;
   public function __construct()
   {
-    $this->faq = new FaqModel;
+    $this->tags = new TagsModel;
   }
 
   public function index()
@@ -21,22 +21,22 @@ class Faq extends BaseController
 
     $btn_link = false;
     $modal_title = [
-      'tambah' => 'Tambah FAQ',
-      'edit' => 'Edit FAQ',
-      'delete' => 'Delete FAQ',
+      'tambah' => 'Tambah tags',
+      'edit' => 'Edit tags',
+      'delete' => 'Delete tags',
     ];
-    $delete_msg = 'Are You sure Want To Delete This FAQ ?';
+    $delete_msg = 'Are You sure Want To Delete This tags ?';
     $modal_field = [
       [
-        'name' => 'question',
+        'name' => 'slug',
       ],
-      ['name' => 'answer']
+      ['name' => 'name']
     ];
-    $cols = ['question', 'answer'];
-    $rows = ['question', 'answer'];
-    $dataTables = $this->faq->findAll();
+    $cols = ['slug', 'name'];
+    $rows = ['slug', 'name'];
+    $dataTables = $this->tags->findAll();
     $data = [
-      'title' => 'FAQ Page',
+      'title' => 'Tags Page',
       'cols' => $cols,
       'rows' => $rows,
       'dataTables' => $dataTables,
@@ -45,36 +45,36 @@ class Faq extends BaseController
       'btn_link' => $btn_link,
       'delete_msg' => $delete_msg,
     ];
-    return view('admin/faq', $data);
+    return view('admin/tags', $data);
   }
 
 
   private function redirect_back($msg, $fail = false)
   {
     if ($fail) {
-      session()->setFlashdata('message', ['Failed to ' . $msg . ' FAQ', 'danger']);
-      return redirect()->to(base_url('/faq-admin'));
+      session()->setFlashdata('message', ['Failed to ' . $msg . ' tags', 'danger']);
+      return redirect()->to(base_url('/tags-admin'));
     } else {
-      session()->setFlashdata('message', ['Faq successfully ' . $msg, 'success']);
-      return redirect()->to(base_url('/faq-admin'));
+      session()->setFlashdata('message', ['tags successfully ' . $msg, 'success']);
+      return redirect()->to(base_url('/tags-admin'));
     }
   }
 
   private function form_data()
   {
-    $question = $this->request->getPost('question');
-    $answer = $this->request->getPost('answer');
+    $slug = $this->request->getPost('slug');
+    $name = $this->request->getPost('name');
 
     $rules =  [
-      'question' => 'required|max_length[255]',
-      'answer' => 'required',
+      'slug' => 'required|max_length[255]',
+      'name' => 'required',
     ];
 
     if (!$this->validate($rules)) {
       return false;
     }
 
-    $data = ['question' => $question, 'answer' => $answer];
+    $data = ['slug' => $slug, 'name' => $name];
     return $data;
   }
 
@@ -83,7 +83,7 @@ class Faq extends BaseController
     if (!$this->form_data()) {
       return $this->redirect_back('create', 'fail');
     }
-    $this->faq->save($this->form_data());
+    $this->tags->save($this->form_data());
     return $this->redirect_back('created');
   }
 
@@ -93,14 +93,14 @@ class Faq extends BaseController
     if (!$this->form_data()) {
       return $this->redirect_back('update', 'fail');
     }
-    $this->faq->update($id, $this->form_data());
+    $this->tags->update($id, $this->form_data());
     return $this->redirect_back('updated');
   }
 
   public function delete()
   {
     $id = $this->request->getPost('id');
-    $this->faq->where('id', $id)->delete();
+    $this->tags->where('id', $id)->delete();
     return $this->redirect_back('deleted' . $id);
   }
 }
