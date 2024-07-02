@@ -156,19 +156,11 @@ $data = [
   </main>
 
 
-  <!-- <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-
+  <script>
     $('#iconNavbarSidenav').on('click', (e) => {
       $('body').toggleClass('g-sidenav-pinned');
     })
-  </script> -->
+  </script>
 
   <!--   Core JS Files   -->
   <script src="assets/js/core/popper.min.js"></script>

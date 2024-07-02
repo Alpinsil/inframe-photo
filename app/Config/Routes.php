@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 
-// Mengatur allamat semua halaman
+// Mengatur alamat semua halaman
 $routes->get('/help', 'Home::index', ['as' => 'help']);
 $routes->get('/', 'Home::index');
 $routes->get('/test', 'Home::test');
@@ -18,7 +18,7 @@ $routes->post('/login', 'Auth::proses_login');
 $routes->get('/logout', 'Auth::logout');
 
 $routes->get('/dashboard', 'Admin\Dashboard::index');
-$routes->get('/list-order', 'Admin\listOrder::index');
+$routes->get('/list-order', 'Admin\ListOrder::index');
 
 // faq
 $routes->get('/faq-admin', 'Admin\Faq::index');
@@ -45,8 +45,8 @@ $routes->put('/portfolio-admin', 'Admin\Portfolio::update');
 $routes->delete('/portfolio-admin', 'Admin\Portfolio::delete');
 
 // profile
-$routes->get('/profile', 'profile::index');
-$routes->put('/profile', 'profile::update');
+$routes->get('/profile', 'Profile::index');
+$routes->put('/profile', 'Profile::update');
 
 // payment
 $routes->get('/payment/(:any)', 'payment::index/$1');

@@ -53,6 +53,14 @@
           <li><a href="#about">About</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#pricing">Pricing</a></li>
+
+          <?php
+          if (session()->get('role') !== null) { ?>
+            <li class="d-lg-none"><a href="/dashboard">Dashboard</a></li>
+            <li class="d-lg-none"><a href="/logout">Logout</a></li>
+          <?php
+          } else { ?>
+          <?php } ?>
           <!-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Dropdown 1</a></li>
