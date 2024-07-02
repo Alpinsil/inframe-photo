@@ -214,7 +214,8 @@
 
         <div class="row gy-4">
 
-          <?php foreach ($services as $key) { ?>
+          <?php foreach ($services as $key) {
+          ?>
             <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
               <div class="pricing-item">
                 <h3><?= $key['name']; ?></h3>
@@ -222,19 +223,19 @@
                 <ul>
                   <?php
                   $list_service = explode(',', $key['list_service']);
-                  foreach ($list_service as $key) {
-                    if (strlen(trim($key)) == 0) {
+                  foreach ($list_service as $service) {
+                    if (strlen(trim($service)) == 0) {
                       continue;
                     }
                   ?>
-                    <li><i class="bi bi-check"></i> <span><?= $key; ?></span></li>
+                    <li><i class="bi bi-check"></i> <span><?= $service; ?></span></li>
                   <?php } ?>
                   <!-- <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li> -->
                   <!-- <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li> -->
                   <!-- <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li> -->
                   <!-- <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li> -->
                 </ul>
-                <a href="#" class="buy-btn">Buy Now</a>
+                <a href="/payment/<?= $key['id']; ?>" class="buy-btn">Buy Now</a>
               </div>
             </div><!-- End Pricing Item -->
           <?php } ?>

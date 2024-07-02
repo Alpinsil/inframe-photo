@@ -47,3 +47,6 @@ $routes->delete('/portfolio-admin', 'Admin\Portfolio::delete');
 // profile
 $routes->get('/profile', 'profile::index');
 $routes->put('/profile', 'profile::update');
+
+// payment
+$routes->get('/payment/(:any)', 'payment::index/$1');
