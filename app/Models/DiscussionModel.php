@@ -13,4 +13,9 @@ class DiscussionModel extends Model
   {
     return $query->join('users', 'discussion.user_id=users.id')->select('title, discussion.id, users.name as user_id')->findAll();
   }
+
+  public function joinUsersWithId($query, $id)
+  {
+    return $query->join('users', 'discussion.user_id=users.id')->where('user_id', $id)->select('title, discussion.id, users.name as user_id')->findAll();
+  }
 }

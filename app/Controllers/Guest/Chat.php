@@ -22,6 +22,8 @@ class Chat extends BaseController
       return redirect()->to(base_url('/'));
     }
 
+    $user_id = session()->get('user_id');
+
     $btn_link = '/chat-to-guest';
     $btn_link_name = 'Chat';
     $modal_title = [
@@ -38,8 +40,7 @@ class Chat extends BaseController
     ];
     $cols = ['username', 'title'];
     $rows = ['user_id', 'title'];
-    $dataTables = $this->discussion->joinUsers($this->discussion);
-    // dd($dataTables);
+    $dataTables = $this->discussion->joinUsersWithId($this->discussion, $user_id);
     $data = [
       'title' => 'discussion Page',
       'cols' => $cols,
