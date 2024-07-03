@@ -1,10 +1,11 @@
 <?php
 
-use CodeIgniter\Images\Image;
 ?>
 <?= $this->extend('Template/sidebar') ?>
 
 <?= $this->section('content') ?>
-<h1>Dashboard</h1>
 
+<div class="card m-4 p-4">
+  <?= $this->include('Template/table') ?>
+</div>
 <?= $this->endSection(); ?>

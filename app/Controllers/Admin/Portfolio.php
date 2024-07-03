@@ -15,7 +15,6 @@ class Portfolio extends BaseController
   public function __construct()
   {
     $this->portfolio = new PortfolioModel;
-    // $this->tags = $this->portfolio->join('tags', 'portfolio.tag_id=tags.id')->findAll();
     $this->tags = new TagsModel;
   }
 
@@ -45,7 +44,7 @@ class Portfolio extends BaseController
       ];
     $cols = ['name', 'tag', 'image'];
     $rows = ['name', 'tag_id', ['image', 'image']];
-    $dataTables = $this->portfolio->joinTags();
+    $dataTables = $this->portfolio->joinTags($this->portfolio);
     $data = [
       'title' => 'Portfolio Page',
       'cols' => $cols,
@@ -77,29 +76,41 @@ class Portfolio extends BaseController
     $tag_id = $this->request->getPost('tag_id');
     $image = $this->request->getFile('image');
     $imageName = $image->getRandomName();
+    $path = $this->request->getPost('path');
 
     $rules =  [
       'name' => 'required|max_length[255]',
       'tag_id' => 'required',
-      'image' => 'is_image[image]',
     ];
 
+    if ($type == 'create') {
+      array_push($rules, ['image' => 'is_image[image]|uploaded[image]']);
+    }
+
     if (!$this->validate($rules)) {
+
       return false;
     }
 
     $data = ['name' => $name, 'tag_id' => $tag_id, 'image' => $imageName];
 
-    if ($image->move('assets/portfolio', $imageName)) {
-      if ($type === 'create') {
+    if ($type === 'create') {
+      if ($image->move('assets/portfolio', $imageName)) {
         $this->portfolio->save($data);
         return $data;
-      } else {
-        // $data = $this->portfolio->find($type);
-        $path = $this->request->getPost('path');
+      }
+    } else {
+      // $data = $this->portfolio->find($type);
+      // $path = 'assets/portfolio/' . $data['image'];
+      if ($image->getName()) {
         $path = 'assets/portfolio/' . $path;
-        // $path = 'assets/portfolio/' . $data['image'];
         unlink($path);
+        if ($image->move('assets/portfolio', $imageName)) {
+          $this->portfolio->update($type, $data);
+          return $data;
+        }
+      } else {
+        $data = ['name' => $name, 'tag_id' => $tag_id];
         $this->portfolio->update($type, $data);
         return $data;
       }

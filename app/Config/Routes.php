@@ -50,3 +50,18 @@ $routes->put('/profile', 'Profile::update');
 
 // payment
 $routes->get('/payment/(:any)', 'payment::index/$1');
+
+// Chat Admin
+$routes->get('/chat-admin', 'Admin\Chat::index');
+$routes->post('/chat-admin', 'Admin\Chat::create');
+$routes->put('/chat-admin', 'Admin\Chat::update');
+$routes->delete('/chat-admin', 'Admin\Chat::delete');
+
+// Chat Guest
+$routes->get('/chat-guest', 'Guest\Chat::index');
+$routes->post('/chat-guest', 'Guest\Chat::create');
+$routes->put('/chat-guest', 'Guest\Chat::update');
+$routes->delete('/chat-guest', 'Guest\Chat::delete');
+
+$routes->get('/chat-to-guest', 'Admin\ChatToGuest::index');
+$routes->post('/chat-to-guest', 'Admin\ChatToGuest::create');

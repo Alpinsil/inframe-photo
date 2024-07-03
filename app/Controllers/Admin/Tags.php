@@ -101,6 +101,6 @@ class Tags extends BaseController
   {
     $id = $this->request->getPost('id');
     $this->tags->where('id', $id)->delete();
-    return $this->redirect_back('deleted' . $id);
+    return $this->redirect_back('deleted');
   }
 }

@@ -74,26 +74,7 @@
             <div class="row g-3">
 
               <div class="col-12">
-                <label for="username" class="form-label">Username</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text">@</span>
-                  <input type="text" class="form-control" id="username" placeholder="Username" required="">
-                  <div class="invalid-feedback">
-                    Your username is required.
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-12">
-                <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-                <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                <div class="invalid-feedback">
-                  Please enter a valid email address for shipping updates.
-                </div>
-              </div>
-
-              <div class="col-12">
-                <label for="address" class="form-label">Address</label>
+                <label for="address" class="form-label">Lokasi Acara</label>
                 <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
                 <div class="invalid-feedback">
                   Please enter your shipping address.

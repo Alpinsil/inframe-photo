@@ -101,6 +101,6 @@ class Faq extends BaseController
   {
     $id = $this->request->getPost('id');
     $this->faq->where('id', $id)->delete();
-    return $this->redirect_back('deleted' . $id);
+    return $this->redirect_back('deleted');
   }
 }

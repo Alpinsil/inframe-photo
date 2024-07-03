@@ -65,9 +65,13 @@
           <?php } ?>
           <td class="">
             <?php if ($btn_link) { ?>
-              <a href="<?= $btn_link; ?>/<?= $data['id']; ?>" type="button" class="btn btn-warning btn-simple p-2">
-                Edit
+              <a href="<?= $btn_link; ?>?id=<?= $data['id']; ?>" type="button" class="btn btn-warning btn-simple p-2">
+                <?= $btn_link_name; ?>
               </a>
+              <input type="hidden" name="id" value="<?= $data['id']; ?>">
+              <script>
+
+              </script>
             <?php } else { ?>
               <button type="button" class="btn btn-warning btn-simple p-2" data-bs-toggle="modal" data-bs-target="#modal-edit<?= $data['id']; ?>">
                 Edit
@@ -86,7 +90,7 @@
               <div class="modal-body p-0">
                 <div class="card card-plain">
                   <div class="card-header pb-0 text-left">
-                    <h3 class="font-weight-bolder text-info text-gradient"><?= $modal_title['edit']; ?></h3>
+                    <h3 class="font-weight-bolder text-info text-gradient"><?= isset($modal_title['edit']) ?? $modal_title['edit']; ?></h3>
                   </div>
                   <div class="card-body">
                     <form role="form text-left" action="" method="POST" enctype="multipart/form-data">
@@ -189,8 +193,15 @@
               <?php foreach ($modal_field as $row) {
                 $name =  $row['name'];
                 $label =  ucfirst(str_replace(["_", 'id'], " ", $row['name']));
+                if (!empty($row['type'])) {
+                  if ($row['type'] != 'hidden') {
+                    echo  '<label>' . $label . '</label>';
+                  }
+                } else {
+                  echo  '<label>' . $label . '</label>';
+                }
               ?>
-                <label> <?= $label; ?> </label>
+
                 <div class="input-group mb-3">
                   <?php if (!empty($row['type']) && $row['type'] == 'textarea') { ?>
                     <textarea type="<?= empty($row['type']) ? 'text' : $row['type'] ?>" rows="8" cols="50" class="form-control" name="<?= $name; ?>"></textarea>

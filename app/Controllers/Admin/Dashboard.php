@@ -9,7 +9,7 @@ class Dashboard extends BaseController
 {
   public function index()
   {
-    if (session()->get('role') == null || session()->get('role') !== 'admin') {
+    if (session()->get('role') == null) {
       return redirect()->to(base_url('/'));
     }
     $data = ['title' => 'Dashboard Page'];

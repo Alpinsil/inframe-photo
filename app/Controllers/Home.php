@@ -31,7 +31,7 @@ class Home extends BaseController
                 'faq' => $faq->findAll(5),
                 'services' => $services->findAll(5),
                 'tags' => $tags->findAll(),
-                'portfolio' => $portfolio->joinTags(),
+                'portfolio' => $portfolio->joinTags($portfolio),
             ];
         return view('home', $data);
     }

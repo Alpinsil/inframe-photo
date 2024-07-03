@@ -1,14 +1,22 @@
 <?php
-$data = [
-  ['name' => 'Dashboard', 'icon' => 'ni ni-tv-2 text-primary', 'link' => 'dashboard'],
-  ['name' => 'List Order', 'icon' => 'ni ni-calendar-grid-58 text-warning', 'link' => 'list-order'],
-  ['name' => 'Services', 'icon' => 'ni ni-single-copy-04 text-primary', 'link' => 'services'],
-  ['name' => 'FAQ', 'icon' => 'fa-solid fa-circle-question text-primary', 'link' => 'faq-admin'],
-  ['name' => 'Tags', 'icon' => 'fa-solid fa-tag text-warning', 'link' => 'tags-admin'],
-  ['name' => 'Portfolio', 'icon' => 'fa-solid fa-briefcase text-warning', 'link' => 'portfolio-admin'],
-
-];
+if (session()->get('role') == 'admin') {
+  $data = [
+    ['name' => 'Dashboard', 'icon' => 'ni ni-tv-2 text-primary', 'link' => 'dashboard'],
+    ['name' => 'List Order', 'icon' => 'ni ni-calendar-grid-58 text-warning', 'link' => 'list-order'],
+    ['name' => 'Services', 'icon' => 'ni ni-single-copy-04 text-primary', 'link' => 'services'],
+    ['name' => 'FAQ', 'icon' => 'fa-solid fa-circle-question text-primary', 'link' => 'faq-admin'],
+    ['name' => 'Tags', 'icon' => 'fa-solid fa-tag text-warning', 'link' => 'tags-admin'],
+    ['name' => 'Portfolio', 'icon' => 'fa-solid fa-briefcase text-warning', 'link' => 'portfolio-admin'],
+    ['name' => 'Chat', 'icon' => 'fa-solid fa-comments text-success', 'link' => 'chat-admin'],
+  ];
+} else {
+  $data = [
+    ['name' => 'Dashboard', 'icon' => 'ni ni-tv-2 text-primary', 'link' => 'dashboard'],
+    ['name' => 'Chat', 'icon' => 'fa-solid fa-comments text-success', 'link' => 'chat-guest'],
+  ];
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +34,7 @@ $data = [
   <!-- Nucleo Icons -->
   <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
+
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
@@ -51,24 +60,22 @@ $data = [
       </a>
     </div>
     <hr class="horizontal dark mt-0">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-      <ul class="navbar-nav">
-        <?php
-        foreach ($data as $key) { ?>
-          <li class="nav-item">
-            <a class="nav-link <?= $key['link'] == uri_string() ? 'active' : '' ?>" href="/<?= $key['link']; ?>">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="<?= $key['icon']; ?> text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1"><?= $key['name']; ?></span>
-            </a>
-          </li>
-        <?php
-        }
-        ?>
-      </ul>
-    </div>
 
+    <ul class="navbar-nav">
+      <?php
+      foreach ($data as $key) { ?>
+        <li class="nav-item">
+          <a class="nav-link <?= $key['link'] == uri_string() ? 'active' : '' ?>" href="/<?= $key['link']; ?>">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="<?= $key['icon']; ?> text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1"><?= $key['name']; ?></span>
+          </a>
+        </li>
+      <?php
+      }
+      ?>
+    </ul>
     <!-- <div class="sidenav-footer mx-3 ">
       <div class="card card-plain shadow-none" id="sidenavCard">
         <img class="w-50 mx-auto" src="assets/img/illustrations/icon-documentation.svg" alt="sidebar_illustration">
