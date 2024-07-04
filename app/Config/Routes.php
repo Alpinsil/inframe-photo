@@ -18,7 +18,11 @@ $routes->post('/login', 'Auth::proses_login');
 $routes->get('/logout', 'Auth::logout');
 
 $routes->get('/dashboard', 'Admin\Dashboard::index');
+
+// List Order
 $routes->get('/list-order', 'Admin\ListOrder::index');
+$routes->delete('/list-order', 'Admin\ListOrder::delete');
+$routes->put('/list-order', 'Admin\ListOrder::update');
 
 // faq
 $routes->get('/faq-admin', 'Admin\Faq::index');
@@ -65,3 +69,9 @@ $routes->delete('/chat-guest', 'Guest\Chat::delete');
 
 $routes->get('/chat-to-guest', 'Admin\ChatToGuest::index');
 $routes->post('/chat-to-guest', 'Admin\ChatToGuest::create');
+
+// Riwayat
+$routes->get('/riwayat-admin', 'Admin\Riwayat::index');
+$routes->post('/riwayat-admin', 'Admin\Riwayat::create');
+$routes->put('/riwayat-admin', 'Admin\Riwayat::update');
+$routes->delete('/riwayat-admin', 'Admin\Riwayat::delete');

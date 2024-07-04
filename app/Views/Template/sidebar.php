@@ -8,6 +8,7 @@ if (session()->get('role') == 'admin') {
     ['name' => 'Tags', 'icon' => 'fa-solid fa-tag text-warning', 'link' => 'tags-admin'],
     ['name' => 'Portfolio', 'icon' => 'fa-solid fa-briefcase text-warning', 'link' => 'portfolio-admin'],
     ['name' => 'Chat', 'icon' => 'fa-solid fa-comments text-success', 'link' => 'chat-admin'],
+    ['name' => 'Riwayat', 'icon' => 'fa-solid fa-history text-success', 'link' => 'riwayat-admin'],
   ];
 } else {
   $data = [

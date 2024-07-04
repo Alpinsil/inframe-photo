@@ -28,10 +28,11 @@
 <?php
 } ?>
 
-
-<button type="button" class="btn btn-primary btn-simple p-2 w-lg-20" data-bs-toggle="modal" data-bs-target="#modal-tambah">
-  <?= $modal_title['tambah']; ?>
-</button>
+<?php if (isset($modal_title['tambah'])) { ?>
+  <button type="button" class="btn btn-primary btn-simple p-2 w-lg-20" data-bs-toggle="modal" data-bs-target="#modal-tambah">
+    <?= $modal_title['tambah']; ?>
+  </button>
+<?php } ?>
 
 <div class="table-responsive">
   <table id="example" class="display table align-items-center mb-0" style="width:100%">
@@ -48,10 +49,12 @@
 
       <?php
       $no = 1;
-      foreach ($dataTables  as $data) { ?>
+      foreach ($dataTables  as $data) {
+      ?>
         <tr>
           <td class="text-start text-center"><?= $no; ?></td>
           <?php foreach ($rows as $row) {
+
             if (isset($row[1]) && $row[1] == 'image') { ?>
               <div class="d-flex justify-content-center mx-auto">
                 <td class="">
@@ -59,7 +62,7 @@
                 </td>
               </div>
             <?php } else { ?>
-              <td class="text-wrap"><?= $data[$row]; ?></td>
+              <td class="text-wrap text-center"><?= $data[$row]; ?></td>
             <?php }
             ?>
           <?php } ?>
@@ -73,13 +76,18 @@
 
               </script>
             <?php } else { ?>
-              <button type="button" class="btn btn-warning btn-simple p-2" data-bs-toggle="modal" data-bs-target="#modal-edit<?= $data['id']; ?>">
-                Edit
+              <?php if (isset($modal_title['edit'])) { ?>
+
+                <button type="button" class="btn btn-warning btn-simple p-2" data-bs-toggle="modal" data-bs-target="#modal-edit<?= $data['id']; ?>">
+                  Edit
+                </button>
+              <?php } ?>
+            <?php } ?>
+            <?php if (isset($modal_title['delete'])) { ?>
+              <button type="button" class="btn btn-danger btn-simple p-2" data-bs-toggle="modal" data-bs-target="#modal-delete<?= $data['id']; ?>">
+                Delete
               </button>
             <?php } ?>
-            <button type="button" class="btn btn-danger btn-simple p-2" data-bs-toggle="modal" data-bs-target="#modal-delete<?= $data['id']; ?>">
-              Delete
-            </button>
           </td>
         </tr>
 
@@ -90,7 +98,7 @@
               <div class="modal-body p-0">
                 <div class="card card-plain">
                   <div class="card-header pb-0 text-left">
-                    <h3 class="font-weight-bolder text-info text-gradient"><?= isset($modal_title['edit']) ?? $modal_title['edit']; ?></h3>
+                    <h3 class="font-weight-bolder text-info text-gradient"><?= isset($modal_title['edit']) ? $modal_title['edit'] : ''; ?></h3>
                   </div>
                   <div class="card-body">
                     <form role="form text-left" action="" method="POST" enctype="multipart/form-data">
@@ -143,7 +151,9 @@
           <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h6 class="modal-title" id="modal-title-default"><?= $modal_title['delete']; ?></h6>
+                <?php if (isset($modal_title['delete'])) { ?>
+                  <h6 class="modal-title" id="modal-title-default"><?= $modal_title['delete']; ?></h6>
+                <?php } ?>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
@@ -184,7 +194,9 @@
       <div class="modal-body p-0">
         <div class="card card-plain">
           <div class="card-header pb-0 text-left">
-            <h3 class="font-weight-bolder text-info text-gradient"><?= $modal_title['tambah']; ?></h3>
+            <?php if (isset($modal_title['tambah'])) { ?>
+              <h3 class="font-weight-bolder text-info text-gradient"><?= $modal_title['tambah']; ?></h3>
+            <?php } ?>
           </div>
           <div class="card-body">
             <form role="form text-left" action="" method="POST" enctype="multipart/form-data">
