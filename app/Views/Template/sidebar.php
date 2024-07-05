@@ -4,6 +4,7 @@ if (session()->get('role') == 'admin') {
     ['name' => 'Dashboard', 'icon' => 'ni ni-tv-2 text-primary', 'link' => 'dashboard'],
     ['name' => 'List Order', 'icon' => 'ni ni-calendar-grid-58 text-warning', 'link' => 'list-order'],
     ['name' => 'Services', 'icon' => 'ni ni-single-copy-04 text-primary', 'link' => 'services'],
+    ['name' => 'Metode Pembayaran', 'icon' => 'fa-solid fa-dollar-sign text-success', 'link' => 'payment-methods'],
     ['name' => 'FAQ', 'icon' => 'fa-solid fa-circle-question text-primary', 'link' => 'faq-admin'],
     ['name' => 'Tags', 'icon' => 'fa-solid fa-tag text-warning', 'link' => 'tags-admin'],
     ['name' => 'Portfolio', 'icon' => 'fa-solid fa-briefcase text-warning', 'link' => 'portfolio-admin'],
@@ -14,6 +15,7 @@ if (session()->get('role') == 'admin') {
   $data = [
     ['name' => 'Dashboard', 'icon' => 'ni ni-tv-2 text-primary', 'link' => 'dashboard'],
     ['name' => 'Chat', 'icon' => 'fa-solid fa-comments text-success', 'link' => 'chat-guest'],
+    ['name' => 'Daftar Pesanan', 'icon' => 'ni ni-calendar-grid-58 text-warning', 'link' => 'list-orders-guest'],
   ];
 }
 ?>

@@ -24,11 +24,23 @@ $routes->get('/list-order', 'Admin\ListOrder::index');
 $routes->delete('/list-order', 'Admin\ListOrder::delete');
 $routes->put('/list-order', 'Admin\ListOrder::update');
 
+
+// List Order
+$routes->get('/list-orders-guest', 'Guest\ListOrder::index');
+$routes->delete('/list-orders-guest', 'Guest\ListOrder::delete');
+$routes->put('/list-orders-guest', 'Guest\ListOrder::update');
+
 // faq
 $routes->get('/faq-admin', 'Admin\Faq::index');
 $routes->post('/faq-admin', 'Admin\Faq::create');
 $routes->put('/faq-admin', 'Admin\Faq::update');
 $routes->delete('/faq-admin', 'Admin\Faq::delete');
+
+// payment-methods
+$routes->get('/payment-methods', 'Admin\PaymentMethods::index');
+$routes->post('/payment-methods', 'Admin\PaymentMethods::create');
+$routes->put('/payment-methods', 'Admin\PaymentMethods::update');
+$routes->delete('/payment-methods', 'Admin\PaymentMethods::delete');
 
 // services
 $routes->get('/services', 'Admin\Services::index');
@@ -54,6 +66,7 @@ $routes->put('/profile', 'Profile::update');
 
 // payment
 $routes->get('/payment/(:any)', 'payment::index/$1');
+$routes->post('/payment/(:any)', 'payment::create/$1');
 
 // Chat Admin
 $routes->get('/chat-admin', 'Admin\Chat::index');

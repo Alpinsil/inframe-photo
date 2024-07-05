@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>jQuery UI Datepicker - Default functionality</title>
+
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -25,7 +26,14 @@
         format: 'dd/mm/yyyy',
         todayHighlight: 'TRUE',
         autoclose: true,
-        datesDisabled: unavailableDates // for disable your specific days
+        datesDisabled: function(date) {
+          var disabled = ["23-06-2024", "24-09-2022", "25-09-2022"];
+          if (date && disabled.indexOf(date.getDate()) > -1) {
+            return true;
+          } else {
+            return false;
+          }
+        }
       });
     });
   </script>

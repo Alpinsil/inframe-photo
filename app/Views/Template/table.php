@@ -58,7 +58,11 @@
             if (isset($row[1]) && $row[1] == 'image') { ?>
               <div class="d-flex justify-content-center mx-auto">
                 <td class="">
-                  <img class="img-thumbnail" width="100" height="100" alt="<?= $data[$row[0]]; ?>" src="assets/portfolio/<?= $data[$row[0]]; ?>">
+                  <?php if (isset($data[$row[0]]) && strlen($data[$row[0]]) > 1) { ?>
+                    <img class="img-thumbnail" width="100" height="100" alt="<?= $data[$row[0]]; ?>" src=" <?= $path_image; ?><?= $data[$row[0]]; ?>">
+                  <?php } else { ?>
+                    <p>Kosong</p>
+                  <?php } ?>
                 </td>
               </div>
             <?php } else { ?>

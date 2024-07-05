@@ -54,6 +54,7 @@ class Portfolio extends BaseController
       'modal_field' => $modal_field,
       'btn_link' => $btn_link,
       'delete_msg' => $delete_msg,
+      'path_image' => 'assets/portfolio/'
     ];
     return view('admin/portfolio', $data);
   }
