@@ -10,7 +10,12 @@
   .text-indent-1 {
     text-indent: 10px;
   }
+
+  .dt-buttons {
+    gap: 10px;
+  }
 </style>
+
 
 
 <?php if (session()->getFlashdata('message')) {
@@ -249,7 +254,13 @@
 
 
 <script>
-  new DataTable('#example');
+  $('#example').DataTable({
+    layout: {
+      topStart: {
+        buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+      }
+    }
+  });
   $('.close').on('click', () => {
     $('.alert').remove()
 

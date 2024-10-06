@@ -5,7 +5,7 @@
 
 <?= $this->section('content') ?>
 
-<div class="card m-4 p-4">
+<div class="card p-4">
   <?= $this->include('Template/table') ?>
 </div>
 <?= $this->endSection(); ?>

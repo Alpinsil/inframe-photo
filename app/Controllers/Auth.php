@@ -108,7 +108,7 @@ class Auth extends BaseController
       session()->set('role', $getData['role']);
       session()->set('user_id', $getData['id']);
       session()->set('user_name', $getData['name']);
-      return redirect()->to('/');
+      return redirect()->to('/kelola-admin');
     } else {
       session()->setFlashdata('login_failed', 'password or email wrong');
       return redirect()->to('/login')->withInput();

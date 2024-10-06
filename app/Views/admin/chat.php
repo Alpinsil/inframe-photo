@@ -5,7 +5,7 @@
 <link href="assets/css/chat.css" rel="stylesheet" />
 
 
-<section style="margin-top: 700px;">
+<section style="margin-top: 700px; width:100%;">
   <div class="chat_window">
     <div class="top_menu">
       <div class="buttons">
@@ -15,6 +15,7 @@
       </div>
       <div class="title"><?= session()->get('role') == 'guest' ? 'Admin' : $user['name']; ?></div>
     </div>
+
     <ul class="messages">
 
       <li class="message appeared right test_message ">
@@ -24,6 +25,7 @@
           </div>
         </div>
       </li>
+
       <?php foreach ($chats as $key) { ?>
         <li class="message appeared test_message <?= $key['user_id'] == $user_id ? 'right' : 'left'; ?>">
           <div class="text_wrapper">
@@ -68,5 +70,5 @@
     }, 300);
   </script>
 
-
-  <?= $this->endSection(); ?>
+</section>
+<?= $this->endSection(); ?>

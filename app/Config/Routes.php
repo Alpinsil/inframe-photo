@@ -17,7 +17,7 @@ $routes->get('/login', 'Auth::login');
 $routes->post('/login', 'Auth::proses_login');
 $routes->get('/logout', 'Auth::logout');
 
-$routes->get('/dashboard', 'Admin\Dashboard::index');
+$routes->get('/kelola-admin', 'Admin\Dashboard::index');
 
 // List Order
 $routes->get('/list-order', 'Admin\ListOrder::index');

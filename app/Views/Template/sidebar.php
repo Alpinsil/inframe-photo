@@ -1,7 +1,7 @@
 <?php
 if (session()->get('role') == 'admin') {
   $data = [
-    ['name' => 'Dashboard', 'icon' => 'ni ni-tv-2 text-primary', 'link' => 'dashboard'],
+    ['name' => 'Kelola Admin', 'icon' => 'ni ni-tv-2 text-primary', 'link' => 'kelola-admin'],
     ['name' => 'List Order', 'icon' => 'ni ni-calendar-grid-58 text-warning', 'link' => 'list-order'],
     ['name' => 'Services', 'icon' => 'ni ni-single-copy-04 text-primary', 'link' => 'services'],
     ['name' => 'Metode Pembayaran', 'icon' => 'fa-solid fa-dollar-sign text-success', 'link' => 'payment-methods'],
@@ -13,7 +13,7 @@ if (session()->get('role') == 'admin') {
   ];
 } else {
   $data = [
-    ['name' => 'Dashboard', 'icon' => 'ni ni-tv-2 text-primary', 'link' => 'dashboard'],
+    ['name' => 'Kelola Admin', 'icon' => 'ni ni-tv-2 text-primary', 'link' => 'dashboard'],
     ['name' => 'Chat', 'icon' => 'fa-solid fa-comments text-success', 'link' => 'chat-guest'],
     ['name' => 'Daftar Pesanan', 'icon' => 'ni ni-calendar-grid-58 text-warning', 'link' => 'list-orders-guest'],
   ];
@@ -50,6 +50,17 @@ if (session()->get('role') == 'admin') {
   <script src="assets/DataTables/datatables.min.js"></script>
   <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
   <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> -->
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+  <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+  <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.bootstrap5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
