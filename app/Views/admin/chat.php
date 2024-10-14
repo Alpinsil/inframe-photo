@@ -2,6 +2,7 @@
 
 <?= $this->section('content') ?>
 
+
 <link href="assets/css/chat.css" rel="stylesheet" />
 
 
@@ -13,18 +14,17 @@
         <div class="button minimize"></div>
         <div class="button maximize"></div>
       </div>
-      <div class="title"><?= session()->get('role') == 'guest' ? 'Admin' : $user['name']; ?></div>
+      <div class="title text-black"><?= session()->get('role') == 'guest' ? 'Admin' : $user['name']; ?></div>
     </div>
 
     <ul class="messages">
 
-      <li class="message appeared right test_message ">
+      <!-- <li class="message appeared right test_message ">
         <div class="text_wrapper bg-success text-white">
           <div class="text text-white text-2xl">
-            <?= $discussion['title']; ?>
           </div>
         </div>
-      </li>
+      </li> -->
 
       <?php foreach ($chats as $key) { ?>
         <li class="message appeared test_message <?= $key['user_id'] == $user_id ? 'right' : 'left'; ?>">
@@ -35,7 +35,6 @@
           </div>
         </li>
       <?php } ?>
-
 
     </ul>
     <form action="" method="post">

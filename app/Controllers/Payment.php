@@ -7,8 +7,11 @@ use App\Models\UserModel;
 use App\Models\ServiceModel;
 use App\Models\PaymentMethodsModel;
 
+helper('filesystem');
+
 class Payment extends BaseController
 {
+  protected $helpers = ['form'];
   protected $user;
   protected $service;
   protected $payment_methods;
@@ -61,21 +64,40 @@ class Payment extends BaseController
   {
     $payment_id = $this->request->getPost('paymentMethod');
     $date = $this->request->getPost('date');
-    $date = date_create($date);
-    $date = date_format($date, "Y-m-d");
-    $arr_save =
-      [
-        'date' => $date,
-        'user_id' => $this->user_id,
-        'service_id' => $service_id,
-        'payment_method_id' => $payment_id,
-        'status' => 'belum_diproses',
-        'status_pembayaran' => 'belum_dibayar',
-        'image' => '',
-        'available' => 'yes'
-      ];
-    if ($this->list_orders->save($arr_save)) {
-      return redirect()->to('/list-orders-guest');
+    $bukti_pembayaran = $this->request->getFile('bukti_pembayaran');
+    $bukti_pembayaran_name = $bukti_pembayaran->getRandomName();
+
+
+    $rules =  [
+      'date' => 'required',
+    ];
+
+    if (!$this->validate($rules)) {
+      return redirect()->back()->withInput();
+    }
+
+    if ($bukti_pembayaran->getName() == null) {
+      return redirect()->back();
+    } else {
+
+      if ($bukti_pembayaran->move('assets/bukti_pembayaran', $bukti_pembayaran_name)) {
+        $date = date_create($date);
+        $date = date_format($date, "Y-m-d");
+        $arr_save =
+          [
+            'date' => $date,
+            'user_id' => $this->user_id,
+            'service_id' => $service_id,
+            'payment_method_id' => $payment_id,
+            'status' => 'belum_diproses',
+            'status_pembayaran' => 'proses_verifikasi',
+            'image' => $bukti_pembayaran_name,
+            'available' => 'yes'
+          ];
+        if ($this->list_orders->save($arr_save)) {
+          return redirect()->to('/list-orders-guest');
+        }
+      }
     }
   }
 }

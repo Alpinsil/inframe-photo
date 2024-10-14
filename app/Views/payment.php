@@ -31,13 +31,13 @@
       <div class="row g-5 d-flex justify-content-center">
         <div class="col-md-5 col-lg-4 order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-primary">Your cart</span>
+            <span class="text-primary">Detail paket</span>
             <!-- <span class="badge bg-primary rounded-pill">3</span> -->
           </h4>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
-                <h6 class="my-0"><?= $service_data['name']; ?></h6>
+                <h6 class="my-0">Nama Paket: <span class="text-primary"><?= $service_data['name']; ?></span> </h6>
                 <small class="text-muted">
                   <ul>
                     <?php
@@ -54,8 +54,8 @@
                 </small>
               </div>
               <span class="text-muted d-inline-flex">
-                <p class="price"><?= $service_data['price']; ?> </p>
                 Rp
+                <p class="price"><?= $service_data['price']; ?></p>
               </span>
             </li>
             <!-- <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -91,28 +91,31 @@
               <button type="submit" class="btn btn-secondary">Redeem</button>
             </div>
           </form> -->
+          <img src="/assets/services/<?= $service_data['image']; ?>" class=" rounded-3" width="400px" height="500px">
         </div>
 
 
+
+
         <div class="col-md-7 col-lg-8">
-          <form class="needs-validation" novalidate="" method="POST">
+          <form class="needs-validation" novalidate="" method="POST" enctype="multipart/form-data">
             <div class="row g-3">
 
               <div class="col-12">
                 <label for="address" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="name" value="<?= $user_data['name']; ?>" disabled required="true">
+                <input type="text" class="form-control <?= validation_show_error('name') ? 'is-invalid' : ''; ?>" id="name" value="<?= $user_data['name']; ?>" required="true">
                 <div class="invalid-feedback">
-                  Please enter your shipping address.
+                  <?= validation_show_error('name'); ?>
                 </div>
               </div>
 
               <div class="col-8">
                 <label for="address" class="form-label">Pilih Tanggal</label>
                 <!-- <input type="date" class="form-control" id="name" name="date"  required="true"> -->
-                <p>Date: <i class="fa-regular fa-calendar-days"></i> <input class="form-control" type="text" name="date" id="datepicker"></p>
+                <p>Date: <i class="fa-regular fa-calendar-days"></i> <input class="form-control <?= validation_show_error('date') ? 'is-invalid' : ''; ?>" type="text" name="date" id="datepicker"></p>
 
                 <div class="invalid-feedback">
-                  Please enter your shipping address.
+                  <?= validation_show_error('date'); ?>
                 </div>
               </div>
 
@@ -174,6 +177,14 @@
 
               </div>
 
+              <div class="col-12">
+                <label for="address" class="form-label">Bukti Pembayaran</label>
+                <input type="file" class="form-control" name="bukti_pembayaran" required="true">
+                <div class="invalid-feedback">
+                  Please enter your shipping address.
+                </div>
+              </div>
+
               <!-- <div class="row gy-3">
                 <div class="col-md-6">
                   <label for="cc-name" class="form-label">Name on card</label>
@@ -211,20 +222,20 @@
 
               <!-- <hr class="my-4"> -->
 
-              <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+              <button class="w-100 btn btn-primary btn-lg" type="submit">Proses Pembayaran</button>
           </form>
         </div>
       </div>
     </main>
 
-    <!-- <footer class="my-5 pt-5 text-muted text-center text-small">
-      <p class="mb-1">© 2017–2021 Company Name</p>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">©2024 Inframe-photo</p>
       <ul class="list-inline">
         <li class="list-inline-item"><a href="https://getbootstrap.com/docs/5.0/examples/checkout/#">Privacy</a></li>
         <li class="list-inline-item"><a href="https://getbootstrap.com/docs/5.0/examples/checkout/#">Terms</a></li>
         <li class="list-inline-item"><a href="https://getbootstrap.com/docs/5.0/examples/checkout/#">Support</a></li>
       </ul>
-    </footer> -->
+    </footer>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

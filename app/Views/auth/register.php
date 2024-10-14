@@ -31,11 +31,14 @@
       } ?>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-block create-account">Create Account</button>
+        <button type="submit" class="btn btn-block create-account">Buat akun baru</button>
       </div>
       <hr>
       <div class="text-center">
-        <a href="/login" class="text-center">Already have account ? Login</a>
+        <a href="/login" class="text-center">Sudah punya akun ? Login</a>
+      </div>
+      <div class="text-center">
+        <a href="/forgot-password" class="text-center">Lupa Password</a>
       </div>
     </form>
   </div>

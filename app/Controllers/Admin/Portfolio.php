@@ -85,11 +85,11 @@ class Portfolio extends BaseController
     ];
 
     if ($type == 'create') {
-      array_push($rules, ['image' => 'is_image[image]|uploaded[image]']);
+      // array_push($rules, ['image' => 'is_image[image]|uploaded[image]']);
     }
 
     if (!$this->validate($rules)) {
-
+      // dd('sini');
       return false;
     }
 
@@ -120,10 +120,13 @@ class Portfolio extends BaseController
 
   public function create()
   {
+
     if (!$this->form_data('create')) {
       return $this->redirect_back('create', 'fail');
     }
     return $this->redirect_back('created');
+
+    // dd($this->form_data('create'));
   }
 
   public function update()

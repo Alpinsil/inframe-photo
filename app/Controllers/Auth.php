@@ -4,15 +4,18 @@ namespace App\Controllers;
 
 use DateTime;
 use App\Models\UserModel;
+use App\Models\DiscussionModel;
 
 class Auth extends BaseController
 {
 
   protected $userModel;
   protected $helpers = ['form'];
+  protected $discussion;
 
   public function __construct()
   {
+    $this->discussion = new DiscussionModel;
     $this->userModel = new UserModel;
   }
 
@@ -78,6 +81,11 @@ class Auth extends BaseController
       'alamat' => $alamat,
       // 'created_at' => $currentDateTime,
     ]);
+
+    $data = $this->userModel->where('email', $email)->find();
+
+    $this->discussion->save(['user_id' => $data[0]['id'], 'title' => 'ada yang bisa saya bantu?']);
+
     session()->setFlashdata('account_created', 'Account successfully created');
 
     return redirect()->to(base_url('/login'));

@@ -35,6 +35,7 @@ class Profile extends BaseController
     $name = $this->request->getPost('name');
     $nohp = $this->request->getPost('nohp');
     $alamat = $this->request->getPost('alamat');
+    $email = $this->request->getPost('email');
 
 
     $rules =  [
@@ -52,6 +53,7 @@ class Profile extends BaseController
         'name' => $name,
         'nohp' => $nohp,
         'alamat' => $alamat,
+        'email' => $email
       ];
     return $data;
   }

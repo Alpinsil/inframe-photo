@@ -25,19 +25,21 @@ class Chat extends BaseController
     $btn_link = '/chat-to-guest';
     $btn_link_name = 'Chat';
     $modal_title = [
-      'tambah' => 'Tambah discussion',
+      // 'tambah' => 'Tambah discussion',
       'edit' => 'Edit discussion',
-      'delete' => 'Delete discussion',
+      // 'delete' => 'Delete discussion',
     ];
     $delete_msg = 'Are You sure Want To Delete This discussion ?';
     $modal_field = [
       [
-        'name' => 'user_id', 'type' => 'select', 'options' => $this->users->where('role', 'guest')->findAll()
+        'name' => 'user_id',
+        'type' => 'select',
+        'options' => $this->users->where('role', 'guest')->findAll()
       ],
       ['name' => 'title']
     ];
-    $cols = ['username', 'title'];
-    $rows = ['user_id', 'title'];
+    $cols = ['username'];
+    $rows = ['user_id'];
     $dataTables = $this->discussion->joinUsers($this->discussion);
     // dd($dataTables);
     $data = [

@@ -7,5 +7,5 @@ use CodeIgniter\Model;
 class ServiceModel extends Model
 {
   protected $table = 'services';
-  protected $allowedFields = ['name', 'price', 'list_service'];
+  protected $allowedFields = ['name', 'price', 'list_service', 'image'];
 }

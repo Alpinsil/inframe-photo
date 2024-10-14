@@ -53,7 +53,10 @@
       </div>
       <hr>
       <div class="text-center">
-        <a href="/register" class="text-center">Doesnt have account ? register</a>
+        <a href="/register" class="text-center">Belum punya akun? daftar</a>
+      </div>
+      <div class="text-center">
+        <a href="/forgot-password" class="text-center">Lupa Password</a>
       </div>
     </form>
 

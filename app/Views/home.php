@@ -50,16 +50,27 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="#hero" class="active">Beranda</a></li>
-          <li><a href="#about">Tentang</a></li>
+          <?php if (session()->get('role') != null) { ?>
+
+            <li><a href="#about">Tentang</a></li>
+          <?php } ?>
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#pricing">Katalog</a></li>
 
           <?php
-          if (session()->get('role') !== null) { ?>
+
+          if (session()->get('role') === 'admin') {
+
+          ?>
             <li class="d-lg-none"><a href="/kelola-admin">Kelola Web</a></li>
             <li class="d-lg-none"><a href="/logout">Logout</a></li>
           <?php
-          } else { ?>
+          } elseif (session()->get('role') === 'guest') { ?>
+            <li class="d-lg-none"><a href="/profile">Profile</a></li>
+            <li class="d-lg-none"><a href="/">Home</a></li>
+            <li class="d-lg-none"><a href="/chat-to-guest?id=1">Chat</a></li>
+            <li class="d-lg-none"><a href="/list-orders-guest">Daftar Pesanan</a></li>
+            <li class="d-lg-none"><a href="/logout">Logout</a></li>
           <?php } ?>
           <!-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
@@ -80,22 +91,32 @@
           </li> -->
           <!-- <li><a href="#contact">Contact</a></li> -->
           <?php
-          // dd(session()->get('user_id'));
-
-          if (session()->get('role') === null) { ?>
-            <a class="btn-getstarted" href="/login">Login</a>
-          <?php
-          } else { ?>
+          if (session()->get('role') === 'guest') { ?>
             <ul>
               <li class="dropdown"><a href="#"><span>Hi, <?= ucfirst(session()->get('user_name')) ?></span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
-                  <li><a href="/dashboard">Dashboard</a></li>
+                  <li><a href="/profile">Profile</a></li>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/chat-to-guest?id=1">Chat</a></li>
+                  <li><a href="/list-orders-guest">Daftar Pesanan</a></li>
                   <li><a href="/logout">Logout</a></li>
                 </ul>
               </li>
             </ul>
           <?php
-          } ?>
+          } elseif (session()->get('role') === 'admin') { ?>
+            <ul>
+              <li class="dropdown"><a href="#"><span>Hi, <?= ucfirst(session()->get('user_name')) ?></span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="/kelola-admin">Kelola Web</a></li>
+                  <li><a href="/logout">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          <?php
+          } else { ?>
+            <a class="btn-getstarted" href="/login">Login</a>
+          <?php } ?>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 
@@ -115,8 +136,12 @@
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
             <h1>Abadikan Momenmu</h1>
             <p>Agar dikenang selamanya</p>
-            <div class="d-flex">
-              <a href="/register" class="btn-get-started">Daftar</a>
+            <div class="">
+              <?php if (session()->get('role') == null) { ?>
+
+                <a href="/register" class="btn-get-started">Daftar</a>
+                <p>Masuk ke akun Anda untuk mengeksplorasi portofolio kami, melihat penawaran eksklusif, dan memesan sesi foto profesional kami. Daftar Sekarang</p>
+              <?php } ?>
               <!-- <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
             </div>
           </div>
@@ -129,40 +154,43 @@
     </section><!-- /Hero Section -->
 
 
-    <!-- About Section -->
-    <section id="about" class="about section">
+    <?php if (session()->get('role') != null) { ?>
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Tentang</h2>
-      </div><!-- End Section Title -->
+      <!-- About Section -->
+      <section id="about" class="about section">
 
-      <div class="container">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Tentang</h2>
+        </div><!-- End Section Title -->
 
-        <div class="row gy-4">
+        <div class="container">
 
-          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <ul>
-              <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-              <li><i class="bi bi-check2-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-              <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo</span></li>
-            </ul>
-          </div>
+          <div class="row gy-4">
 
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+            <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+              <p>
+                Menciptakan Karya Visual yang Memukau dengan Pengalaman Profesional Bersama Kam
+              </p>
+              <ul>
+                <li><i class="bi bi-check2-circle"></i> <span>Pengalaman lebih dari 5 tahun dalam industri fotografi.</span></li>
+                <li><i class="bi bi-check2-circle"></i> <span>Layanan personalisasi sesuai kebutuhan klien.</span></li>
+                <li><i class="bi bi-check2-circle"></i> <span>Fotografer berpengalaman dan kreatif.</span></li>
+              </ul>
+            </div>
+
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+              <p>Inframe Photo merupakan penyedia layanan fotografi profesional yang berdedikasi untuk mengabadikan setiap momen istimewa . Dengan tim yang berpengalaman dan peralatan canggih, kami menawarkan berbagai layanan fotografi mulai dari prewedding, wedding, dan engagement. Dedikasi kami adalah memastikan setiap klien mendapatkan hasil yang memuaskan sesuai harapan dan impian klien.</p>
+              <!-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> -->
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+      </section><!-- /About Section -->
+    <?php } ?>
 
-    </section><!-- /About Section -->
 
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio section">
@@ -170,25 +198,31 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Portfolio</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>Hasil Karya Kami: Dari Inframe Photo.</p>
+        <p>Telusuri hasil-hasil terbaik kami dalam berbagai kategori seperti prewedding, wedding, dan engagement. Setiap foto mencerminkan komitmen kami terhadap kualitas dan kreativitas.</p>
+        <?php if (session()->get('role') == null) { ?>
+        <?php } ?>
       </div><!-- End Section Title -->
 
       <div class="container">
 
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
+          <?php if (session()->get('role') != null) { ?>
+            <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+              <li data-filter="*" class="filter-active">All</li>
 
-            <?php foreach ($tags as $key) { ?>
-              <li data-filter=".<?= $key['slug']; ?>"><?= $key['name']; ?></li>
-            <?php } ?>
-          </ul><!-- End Portfolio Filters -->
+              <?php foreach ($tags as $key) { ?>
+                <li data-filter=".<?= $key['slug']; ?>"><?= $key['name']; ?></li>
+              <?php } ?>
+            </ul><!-- End Portfolio Filters -->
+          <?php } ?>
+
 
           <?php foreach ($portfolio as  $key) { ?>
             <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
               <div class="col-lg-4 col-md-6 portfolio-item isotope-item <?= $key['slug']; ?>">
-                <img src="assets/portfolio/<?= $key['image']; ?>" class="img-fluid" alt="">
+                <img src="assets/portfolio/<?= $key['image']; ?>" class="rounded-3" alt="" width="400px" height="400px">
                 <div class="portfolio-info">
                   <h4><?= $key['name']; ?></h4>
                   <!-- <p>Lorem ipsum, dolor sit</p> -->
@@ -209,49 +243,53 @@
 
     </section><!-- /Portfolio Section -->
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing section">
+    <?php if (session()->get('role') != null) { ?>
+      <!-- Pricing Section -->
+      <section id="pricing" class="pricing section">
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Katalog</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Katalog</h2>
+          <p>Temukan Paket Fotografi yang Sesuai dengan Kebutuhan Anda.</p>
+          <p>Kami menawarkan berbagai paket layanan fotografi yang fleksibel sesuai kebutuhan Lihat detail setiap paket di bawah ini:</p>
+        </div><!-- End Section Title -->
 
-      <div class="container">
+        <div class="container">
 
-        <div class="row gy-4">
+          <div class="row gy-4">
 
-          <?php foreach ($services as $key) {
-          ?>
-            <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-              <div class="pricing-item">
-                <h3><?= $key['name']; ?></h3>
-                <h4 class="price"><sup>Rp</sup> <?= $key['price']; ?><span></span></h4>
-                <ul>
-                  <?php
-                  $list_service = explode(',', $key['list_service']);
-                  foreach ($list_service as $service) {
-                    if (strlen(trim($service)) == 0) {
-                      continue;
-                    }
-                  ?>
-                    <li><i class="bi bi-check"></i> <span><?= $service; ?></span></li>
-                  <?php } ?>
-                  <!-- <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li> -->
-                  <!-- <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li> -->
-                  <!-- <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li> -->
-                  <!-- <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li> -->
-                </ul>
-                <a href="/payment/<?= $key['id']; ?>" class="buy-btn">Buy Now</a>
-              </div>
-            </div><!-- End Pricing Item -->
-          <?php } ?>
+            <?php foreach ($services as $key) {
+            ?>
+              <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="pricing-item">
+                  <h3><?= $key['name']; ?></h3>
+                  <h4 class="price"><sup>Rp</sup> <?= $key['price']; ?><span></span></h4>
+                  <img src="assets/services/<?= $key['image']; ?>" class=" rounded-3" width="200px" height="200px">
+                  <ul>
+                    <?php
+                    $list_service = explode(',', $key['list_service']);
+                    foreach ($list_service as $service) {
+                      if (strlen(trim($service)) == 0) {
+                        continue;
+                      }
+                    ?>
+                      <li><i class="bi bi-check"></i> <span><?= $service; ?></span></li>
+                    <?php } ?>
+                    <!-- <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li> -->
+                    <!-- <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li> -->
+                    <!-- <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li> -->
+                    <!-- <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li> -->
+                  </ul>
+                  <a href="/payment/<?= $key['id']; ?>" class="buy-btn">Buy Now</a>
+                </div>
+              </div><!-- End Pricing Item -->
+            <?php } ?>
+          </div>
+
         </div>
 
-      </div>
-
-    </section><!-- /Pricing Section -->
+      </section><!-- /Pricing Section -->
+    <?php } ?>
 
 
     <!-- Faq 2 Section -->
@@ -260,7 +298,8 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Frequently Asked Questions</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        <p>Pertanyaan yang Sering Diajukan.</p>
+        <p>Dapatkan jawaban atas pertanyaan yang sering muncul seputar layanan kami. Jika Anda memiliki pertanyaan lain, jangan ragu untuk menghubungi kami.</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -316,7 +355,7 @@
           <h4>Useful Links</h4>
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Beranda</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Tentang</a></li>
+            <!-- <li><i class="bi bi-chevron-right"></i> <a href="#">Tentang</a></li> -->
             <li><i class="bi bi-chevron-right"></i> <a href="#">Katalog</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">FAQ</a></li>
           </ul>
@@ -359,13 +398,28 @@
 
   </footer>
 
+  <!-- <div class="scroll-top d-flex align-items-center justify-content-center top-3">
+    <svg fill="#12fe01" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 60" xml:space="preserve" stroke="#12fe01">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        <path d="M30,1.5c-16.542,0-30,12.112-30,27c0,5.205,1.647,10.246,4.768,14.604c-0.591,6.537-2.175,11.39-4.475,13.689 c-0.304,0.304-0.38,0.769-0.188,1.153C0.276,58.289,0.625,58.5,1,58.5c0.046,0,0.093-0.003,0.14-0.01 c0.405-0.057,9.813-1.412,16.617-5.338C21.622,54.711,25.738,55.5,30,55.5c16.542,0,30-12.112,30-27S46.542,1.5,30,1.5z"></path>
+      </g>
+    </svg>
+  </div> -->
+
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <?php if (session()->get('role') == 'guest') { ?>
+    <a href="chat-to-guest?id=1" class="chat-icon d-flex align-items-center justify-content-center"><i class="bi bi-chat-fill"></i></a>
+  <?php } ?>
 
   <!-- Preloader -->
   <div id="preloader"></div>
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script> -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js">
   </script>
   <script src="assets/js/register_script.js"></script>
@@ -381,6 +435,7 @@
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 
   <!-- Main JS File -->
+  <script src="assets/js/jquery.maskMoney.min"></script>
   <script src="assets/js/main.js"></script>
 
 </body>

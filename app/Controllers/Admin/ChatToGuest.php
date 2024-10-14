@@ -26,15 +26,31 @@ class ChatToGuest extends BaseController
       return redirect()->to(base_url('/'));
     }
 
-    $id = $_GET['id'];
-    $user_id = session()->get('user_id');
-    $discussion = $this->discussion->find($id);
-    $user = $this->users->find($discussion['user_id']);
-    // $chats_right = $this->chats->where('user_id', $user['id'])->where('discussion_id', $id)->findAll();
-    // $chats_left = $this->chats->where('user_id !=', $user['id'])->where('discussion_id', $id)->findAll();
-    $chats = $this->chats->where('discussion_id', $id)->findAll();
+    if (session()->get('role') == 'guest') {
+      $user_id = session()->get('user_id');
+      $discussion = $this->discussion->where('user_id', $user_id)->find();
+
+
+      if (!$discussion) {
+        $this->discussion->save(['user_id' => $user_id, 'title' => 'ada yang bisa saya bantu?']);
+      }
+      $id = $discussion[0]['id'];
+
+      $chats = $this->chats->where('discussion_id', $discussion[0]['id'])->findAll();
+      $user = $this->users->find($user_id);
+    } else {
+      $id = $_GET['id'];
+      $user_id = session()->get('user_id');
+      $discussion = $this->discussion->find($id);
+      $user = $this->users->find($discussion['user_id']);
+      $chats = $this->chats->where('discussion_id', $id)->findAll();
+    }
 
     $data = ['title' => 'Chat Page', 'id' => $id, 'discussion' => $discussion, 'user' => $user, 'chats' => $chats, 'user_id' => $user_id];
+
+
+
+
     return view('admin/chat', $data);
   }
 
@@ -43,6 +59,7 @@ class ChatToGuest extends BaseController
     if (session()->get('role') == null) {
       return redirect()->to(base_url('/'));
     }
+
     $discussion_id = $this->request->getPost('discussion_id');
     $user_id = $this->request->getPost('user_id');
     $input_text = $this->request->getPost('input_text');

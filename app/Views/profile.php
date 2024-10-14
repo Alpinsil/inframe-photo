@@ -61,6 +61,11 @@
                   <input type="text" class="form-control" name="alamat" value="<?= $user['alamat']; ?>">
                 </div>
 
+                <div class="mb-3">
+                  <label> Email </label>
+                  <input type="email" class="form-control" name="email" value="<?= $user['email']; ?>">
+                </div>
+
                 <div class="text-center">
                   <button type="submit" class="btn btn-sm bg-success text-white">Update</button>
                   <button type="button" class="btn btn-sm bg-secondary text-white" data-bs-dismiss="modal">Close</button>

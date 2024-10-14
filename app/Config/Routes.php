@@ -88,3 +88,9 @@ $routes->get('/riwayat-admin', 'Admin\Riwayat::index');
 $routes->post('/riwayat-admin', 'Admin\Riwayat::create');
 $routes->put('/riwayat-admin', 'Admin\Riwayat::update');
 $routes->delete('/riwayat-admin', 'Admin\Riwayat::delete');
+
+// Forgot Password
+
+$routes->get('/forgot-password', 'ForgotPassword::index');
+$routes->post('/forgot-password', 'ForgotPassword::otp');
+$routes->post('/forgot-password-otp', 'ForgotPassword::otp_check');

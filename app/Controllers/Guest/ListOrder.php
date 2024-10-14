@@ -26,7 +26,7 @@ class ListOrder extends BaseController
     $modal_title = [
       // 'tambah' => 'Tambah listOrders',  
       'edit' => 'Upload Bukti Pembayaran',
-      'delete' => 'Delete listOrders',
+      // 'delete' => 'Delete listOrders',
     ];
     $delete_msg = 'Are You sure Want To Delete This Order ?';
     $arr_name_statusPembayaran =
