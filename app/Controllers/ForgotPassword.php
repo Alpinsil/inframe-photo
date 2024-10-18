@@ -25,7 +25,7 @@ class ForgotPassword extends BaseController
   public function index(): string
   {
     $input_fields = [['name', 'text'], ['email', 'email'], ['password', 'password'], ['password2', 'password'], ['phone', 'text'], ['alamat', 'text']];
-    return view('auth/forgot-password', ['title' => 'Forgot Password', 'input_fields' => $input_fields]);
+    return view('auth/forgot-password', ['title' => 'Lupa Password', 'input_fields' => $input_fields]);
   }
 
   public function otp()
@@ -88,6 +88,10 @@ class ForgotPassword extends BaseController
     }
 
     $forgot_password_find = $this->forgotPasswordModel->where('otp', $otp)->find();
+    if (!$forgot_password_find) {
+      session()->setFlashdata('otp_wrong', 'Kode Otp Salah');
+      return redirect()->to(base_url('/forgot-password'))->withInput();
+    }
 
     $user_id = $this->userModel->where('email', $forgot_password_find[0]['email'])->find();
 
@@ -95,10 +99,6 @@ class ForgotPassword extends BaseController
 
     $data = ['password' => $password_hash];
 
-    if (!$forgot_password_find) {
-      session()->setFlashdata('otp_wrong', 'Kode Otp Salah');
-      return redirect()->to(base_url('/forgot-password'))->withInput();
-    }
 
     $this->userModel->update($id, $data);
 

@@ -27,13 +27,7 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Arsha
-  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-  * Updated: Jun 06 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
 </head>
 
 <body class="index-page">
@@ -69,7 +63,7 @@
             <li class="d-lg-none"><a href="/profile">Profile</a></li>
             <li class="d-lg-none"><a href="/">Home</a></li>
             <li class="d-lg-none"><a href="/chat-to-guest?id=1">Chat</a></li>
-            <li class="d-lg-none"><a href="/list-orders-guest">Daftar Pesanan</a></li>
+            <li class="d-lg-none"><a href="/list-orders-guest">Riwayat Pesanan</a></li>
             <li class="d-lg-none"><a href="/logout">Logout</a></li>
           <?php } ?>
           <!-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -98,7 +92,7 @@
                   <li><a href="/profile">Profile</a></li>
                   <li><a href="/">Home</a></li>
                   <li><a href="/chat-to-guest?id=1">Chat</a></li>
-                  <li><a href="/list-orders-guest">Daftar Pesanan</a></li>
+                  <li><a href="/list-orders-guest">Riwayat Pesanan</a></li>
                   <li><a href="/logout">Logout</a></li>
                 </ul>
               </li>
@@ -146,7 +140,7 @@
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
-            <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
+            <img src="assets/img/vania_wisnu.png" class="img-fluid" alt="">
           </div>
         </div>
       </div>
@@ -161,27 +155,27 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-          <h2>Tentang</h2>
+          <h2>Tentang Kami</h2>
         </div><!-- End Section Title -->
 
         <div class="container">
 
           <div class="row gy-4">
 
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+              <p>Inframe Photo merupakan penyedia layanan fotografi profesional yang berdedikasi untuk mengabadikan setiap momen istimewa . Dengan tim yang berpengalaman dan peralatan canggih, kami menawarkan berbagai layanan fotografi mulai dari prewedding, wedding, dan engagement. Dedikasi kami adalah memastikan setiap klien mendapatkan hasil yang memuaskan sesuai harapan dan impian klien.</p>
+              <!-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> -->
+            </div>
             <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
               <p>
-                Menciptakan Karya Visual yang Memukau dengan Pengalaman Profesional Bersama Kam
+                Menciptakan Karya Visual yang Memukau dengan Pengalaman Profesional Bersama Kami
               </p>
+
               <ul>
                 <li><i class="bi bi-check2-circle"></i> <span>Pengalaman lebih dari 5 tahun dalam industri fotografi.</span></li>
                 <li><i class="bi bi-check2-circle"></i> <span>Layanan personalisasi sesuai kebutuhan klien.</span></li>
                 <li><i class="bi bi-check2-circle"></i> <span>Fotografer berpengalaman dan kreatif.</span></li>
               </ul>
-            </div>
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-              <p>Inframe Photo merupakan penyedia layanan fotografi profesional yang berdedikasi untuk mengabadikan setiap momen istimewa . Dengan tim yang berpengalaman dan peralatan canggih, kami menawarkan berbagai layanan fotografi mulai dari prewedding, wedding, dan engagement. Dedikasi kami adalah memastikan setiap klien mendapatkan hasil yang memuaskan sesuai harapan dan impian klien.</p>
-              <!-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> -->
             </div>
 
           </div>
@@ -198,8 +192,9 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Portfolio</h2>
-        <p>Hasil Karya Kami: Dari Inframe Photo.</p>
-        <p>Telusuri hasil-hasil terbaik kami dalam berbagai kategori seperti prewedding, wedding, dan engagement. Setiap foto mencerminkan komitmen kami terhadap kualitas dan kreativitas.</p>
+        <p>Dari Inframe Photo.</p>
+        <p>Telusuri hasil-hasil terbaik kami dalam berbagai kategori seperti prewedding, wedding, dan engagement.</p>
+        <p>Setiap foto mencerminkan komitmen kami terhadap kualitas dan kreativitas</p>
         <?php if (session()->get('role') == null) { ?>
         <?php } ?>
       </div><!-- End Section Title -->
@@ -250,8 +245,8 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
           <h2>Katalog</h2>
-          <p>Temukan Paket Fotografi yang Sesuai dengan Kebutuhan Anda.</p>
-          <p>Kami menawarkan berbagai paket layanan fotografi yang fleksibel sesuai kebutuhan Lihat detail setiap paket di bawah ini:</p>
+          <p>Temukan berbagai paket fotografi yang sesuai dengan kebutuhan anda</p>
+          <!-- <p>Kami menawarkan berbagai paket layanan fotografi yang fleksibel sesuai kebutuhan Lihat detail setiap paket di bawah ini:</p> -->
         </div><!-- End Section Title -->
 
         <div class="container">
@@ -280,7 +275,7 @@
                     <!-- <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li> -->
                     <!-- <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li> -->
                   </ul>
-                  <a href="/payment/<?= $key['id']; ?>" class="buy-btn">Buy Now</a>
+                  <a href="/payment/<?= $key['id']; ?>" class="buy-btn">Pesan</a>
                 </div>
               </div><!-- End Pricing Item -->
             <?php } ?>

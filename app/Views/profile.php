@@ -19,7 +19,7 @@
       </div>
       <div class="d-flex justify-content-center">
         <a type="button" class="close bg-secondary text-white py-1 px-2 rounded-3 text-xl" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">close</span>
+          <span aria-hidden="true">tutup</span>
         </a>
       </div>
     </div>
@@ -47,17 +47,17 @@
                 <input type="hidden" name="id" value="<?= $user['id']; ?>">
 
                 <div class="mb-3">
-                  <label> Fullname </label>
+                  <label> Nama lengkap </label>
                   <input type="text" class="form-control" name="name" value="<?= $user['name']; ?>">
                 </div>
 
                 <div class="mb-3">
-                  <label> Phone </label>
+                  <label> No hp </label>
                   <input type="text" class="form-control" name="nohp" value="<?= $user['nohp']; ?>">
                 </div>
 
                 <div class="mb-3">
-                  <label> Address </label>
+                  <label> Alamat </label>
                   <input type="text" class="form-control" name="alamat" value="<?= $user['alamat']; ?>">
                 </div>
 
@@ -67,8 +67,8 @@
                 </div>
 
                 <div class="text-center">
-                  <button type="submit" class="btn btn-sm bg-success text-white">Update</button>
-                  <button type="button" class="btn btn-sm bg-secondary text-white" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-sm bg-success text-white">Ubah</button>
+                  <button type="button" class="btn btn-sm bg-secondary text-white" data-bs-dismiss="modal">Tutup</button>
                 </div>
               </form>
             </div>
@@ -139,7 +139,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Full Name</p>
+                  <p class="mb-0">Nama Lengkap</p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0"><?= $user['name']; ?></p>
@@ -157,7 +157,7 @@
               <hr>
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Phone</p>
+                  <p class="mb-0">No hp</p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0"><?= $user['nohp']; ?></p>
@@ -167,7 +167,7 @@
               <hr>
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Address</p>
+                  <p class="mb-0">Alamat</p>
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0"><?= $user['alamat']; ?></p>

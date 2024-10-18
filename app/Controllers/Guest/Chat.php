@@ -34,7 +34,9 @@ class Chat extends BaseController
     $delete_msg = 'Are You sure Want To Delete This discussion ?';
     $modal_field = [
       [
-        'name' => 'user_id', 'type' => 'hidden', 'options' => $this->users->where('role', 'guest')->findAll()
+        'name' => 'user_id',
+        'type' => 'hidden',
+        'options' => $this->users->where('role', 'guest')->findAll()
       ],
       ['name' => 'title']
     ];
@@ -51,6 +53,7 @@ class Chat extends BaseController
       'btn_link' => $btn_link,
       'delete_msg' => $delete_msg,
       'btn_link_name' => $btn_link_name,
+      'title_up' => 'Chat CS'
 
     ];
     return view('admin/discussion', $data);

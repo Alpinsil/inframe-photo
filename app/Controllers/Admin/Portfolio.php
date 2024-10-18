@@ -30,19 +30,20 @@ class Portfolio extends BaseController
     $modal_title =
       [
         'tambah' => 'Tambah portfolio',
-        'edit' => 'Edit portfolio',
-        'delete' => 'Delete portfolio',
+        'edit' => 'Ubah portfolio',
+        'delete' => 'Hapus portfolio',
       ];
-    $delete_msg = 'Are You sure Want To Delete This portfolio ?';
+    $delete_msg = 'Apakah kamu yakin menghapus portfolio ini ?';
     $modal_field =
       [
         [
           'name' => 'name',
+          'title' => 'nama'
         ],
         ['name' => 'tag_id', 'type' => 'select', 'options' => $this->tags->findAll()],
-        ['name' => 'image', 'type' => 'file']
+        ['name' => 'image', 'type' => 'file', 'title' => 'gambar']
       ];
-    $cols = ['name', 'tag', 'image'];
+    $cols = ['nama', 'tag', 'gambar'];
     $rows = ['name', 'tag_id', ['image', 'image']];
     $dataTables = $this->portfolio->joinTags($this->portfolio);
     $data = [
@@ -63,10 +64,10 @@ class Portfolio extends BaseController
   private function redirect_back($msg, $fail = false)
   {
     if ($fail) {
-      session()->setFlashdata('message', ['Failed to ' . $msg . ' portfolio', 'danger']);
+      session()->setFlashdata('message', ['Gagal untuk ' . $msg . ' portfolio', 'danger']);
       return redirect()->to(base_url('/portfolio-admin'));
     } else {
-      session()->setFlashdata('message', ['portfolio successfully ' . $msg, 'success']);
+      session()->setFlashdata('message', ['portfolio berhasil ' . $msg, 'success']);
       return redirect()->to(base_url('/portfolio-admin'));
     }
   }
@@ -79,13 +80,18 @@ class Portfolio extends BaseController
     $imageName = $image->getRandomName();
     $path = $this->request->getPost('path');
 
-    $rules =  [
-      'name' => 'required|max_length[255]',
-      'tag_id' => 'required',
-    ];
 
     if ($type == 'create') {
-      // array_push($rules, ['image' => 'is_image[image]|uploaded[image]']);
+      $rules =  [
+        'name' => 'required|max_length[255]',
+        'tag_id' => 'required',
+        'image' => 'required'
+      ];
+    } else {
+      $rules =  [
+        'name' => 'required|max_length[255]',
+        'tag_id' => 'required',
+      ];
     }
 
     if (!$this->validate($rules)) {
@@ -122,9 +128,9 @@ class Portfolio extends BaseController
   {
 
     if (!$this->form_data('create')) {
-      return $this->redirect_back('create', 'fail');
+      return $this->redirect_back('dibuat', 'fail');
     }
-    return $this->redirect_back('created');
+    return $this->redirect_back('dibuat');
 
     // dd($this->form_data('create'));
   }
@@ -133,10 +139,10 @@ class Portfolio extends BaseController
   {
     $id = $this->request->getPost('id');
     if (!$this->form_data($id)) {
-      return $this->redirect_back('update', 'fail');
+      return $this->redirect_back('diubah', 'fail');
     }
 
-    return $this->redirect_back('updated');
+    return $this->redirect_back('diubah');
   }
 
   public function delete()
@@ -145,6 +151,6 @@ class Portfolio extends BaseController
     $path = $this->request->getPost('path');
     unlink($path);
     $this->portfolio->where('id', $id)->delete();
-    return $this->redirect_back('deleted' . $id);
+    return $this->redirect_back('dihapus' . $id);
   }
 }

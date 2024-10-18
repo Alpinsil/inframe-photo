@@ -13,11 +13,6 @@
 
   .dt-buttons {
     gap: 10px;
-    color: white;
-  }
-
-  .page-link {
-    color: black !important;
   }
 </style>
 
@@ -31,7 +26,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <a type="button" class="close bg-secondary text-white py-1 px-2 rounded-3 text-xl" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">tutup</span>
+        <span aria-hidden="true">close</span>
       </a>
     </div>
   </div>
@@ -95,13 +90,13 @@
               <?php if (isset($modal_title['edit'])) { ?>
 
                 <button type="button" class="btn btn-warning btn-simple p-2" data-bs-toggle="modal" data-bs-target="#modal-edit<?= $data['id']; ?>">
-                  Ubah
+                  Edit
                 </button>
               <?php } ?>
             <?php } ?>
             <?php if (isset($modal_title['delete'])) { ?>
               <button type="button" class="btn btn-danger btn-simple p-2" data-bs-toggle="modal" data-bs-target="#modal-delete<?= $data['id']; ?>">
-                Hapus
+                Delete
               </button>
             <?php } ?>
           </td>
@@ -125,7 +120,7 @@
 
                       <?php foreach ($modal_field as $row) {
                         $name =  $row['name'];
-                        $label = $row['title'] ?? ucfirst(str_replace(["_", 'id'], " ", $row['name']));
+                        $label =  ucfirst(str_replace(["_", 'id'], " ", $row['name']));
                       ?>
                         <label> <?= $label; ?> </label>
                         <div class="input-group mb-3">
@@ -151,8 +146,8 @@
 
 
                       <div class="text-center">
-                        <button type="submit" class="btn btn-sm bg-success text-white">Ubah</button>
-                        <button type="button" class="btn btn-sm bg-secondary text-white" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-sm bg-success text-white">Update</button>
+                        <button type="button" class="btn btn-sm bg-secondary text-white" data-bs-dismiss="modal">Close</button>
                       </div>
                     </form>
                   </div>
@@ -189,9 +184,9 @@
                   <?php }
                   }
                   ?>
-                  <button type="submit" class="btn bg-gradient-primary">hapus</button>
+                  <button type="submit" class="btn bg-gradient-primary">Delete</button>
                 </form>
-                <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -220,7 +215,7 @@
 
               <?php foreach ($modal_field as $row) {
                 $name =  $row['name'];
-                $label = $row['title'] ?? ucfirst(str_replace(["_", 'id'], " ", $row['name']));
+                $label =  ucfirst(str_replace(["_", 'id'], " ", $row['name']));
                 if (!empty($row['type'])) {
                   if ($row['type'] != 'hidden') {
                     echo  '<label>' . $label . '</label>';
@@ -249,7 +244,7 @@
 
               <div class="text-center">
                 <button type="submit" class="btn btn-sm bg-success text-white">Tambah</button>
-                <button type="button" class="btn btn-sm bg-secondary text-white" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-sm bg-secondary text-white" data-bs-dismiss="modal">Close</button>
               </div>
             </form>
           </div>
@@ -259,7 +254,7 @@
   </div>
 </div>
 
-
+<!-- 
 <script>
   $('#example').DataTable({
     layout: {
@@ -272,4 +267,4 @@
     $('.alert').remove()
 
   })
-</script>
+</script> -->

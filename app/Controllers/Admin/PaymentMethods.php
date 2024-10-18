@@ -22,17 +22,18 @@ class PaymentMethods extends BaseController
     $btn_link = false;
     $modal_title = [
       'tambah' => 'Tambah Metode Pembayaran',
-      'edit' => 'Edit Metode Pembayaran',
-      'delete' => 'Delete Metode Pembayaran',
+      'edit' => 'ubah Metode Pembayaran',
+      'delete' => 'hapus Metode Pembayaran',
     ];
-    $delete_msg = 'Are You sure Want To Delete This Payment Methods ?';
+    $delete_msg = 'Apakah kamu yakin menghapus metode pembayaran ini?';
     $modal_field = [
       [
         'name' => 'name',
+        'title' => 'nama'
       ],
-      ['name' => 'norek']
+      ['name' => 'norek', 'title' => 'no rekening']
     ];
-    $cols = ['name', 'norek'];
+    $cols = ['name', 'no rekening'];
     $rows = ['name', 'norek'];
     $dataTables = $this->paymentMethods->findAll();
     $data = [
@@ -52,10 +53,10 @@ class PaymentMethods extends BaseController
   private function redirect_back($msg, $fail = false)
   {
     if ($fail) {
-      session()->setFlashdata('message', ['Failed to ' . $msg . ' paymentMethods', 'danger']);
+      session()->setFlashdata('message', ['Gagal untuk ' . $msg . ' metode pembayaran', 'danger']);
       return redirect()->to(base_url('/payment-methods'));
     } else {
-      session()->setFlashdata('message', ['paymentMethods successfully ' . $msg, 'success']);
+      session()->setFlashdata('message', ['metode pembayaran berhasil ' . $msg, 'success']);
       return redirect()->to(base_url('/payment-methods'));
     }
   }
@@ -81,26 +82,26 @@ class PaymentMethods extends BaseController
   public function create()
   {
     if (!$this->form_data()) {
-      return $this->redirect_back('create', 'fail');
+      return $this->redirect_back('membuat', 'fail');
     }
     $this->paymentMethods->save($this->form_data());
-    return $this->redirect_back('created');
+    return $this->redirect_back('membuat');
   }
 
   public function update()
   {
     $id = $this->request->getPost('id');
     if (!$this->form_data()) {
-      return $this->redirect_back('update', 'fail');
+      return $this->redirect_back('ubah', 'fail');
     }
     $this->paymentMethods->update($id, $this->form_data());
-    return $this->redirect_back('updated');
+    return $this->redirect_back('diubah');
   }
 
   public function delete()
   {
     $id = $this->request->getPost('id');
     $this->paymentMethods->where('id', $id)->delete();
-    return $this->redirect_back('deleted');
+    return $this->redirect_back('dihapus');
   }
 }

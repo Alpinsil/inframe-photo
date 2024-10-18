@@ -25,10 +25,10 @@ class ListOrder extends BaseController
     $btn_link = false;
     $modal_title = [
       // 'tambah' => 'Tambah listOrders',  
-      'edit' => 'Edit list Orders',
-      'delete' => 'Delete listOrders',
+      'edit' => 'Ubah daftar pesanan',
+      'delete' => 'Hapus daftar pesanan',
     ];
-    $delete_msg = 'Are You sure Want To Delete This Order ?';
+    $delete_msg = 'Apakah kamu yakin ingin menghapus pesanan ini ?';
     $arr_name_statusPembayaran =
       [
         [
@@ -68,8 +68,8 @@ class ListOrder extends BaseController
       ['name' => 'status', 'type' => 'select', 'options' => $arr_name_status],
     ];
 
-    $cols = ['email', 'payment method', 'date', 'Paket', 'price', 'Bukti Pembayaran', 'Status Pembayaran', 'Status'];
-    $rows = ['email', 'payment_method', 'date', 'service_name', 'price', 'image', 'status_pembayaran', 'status'];
+    $cols = ['email', 'metode pembayaran', 'tanggal', 'Paket', 'harga', 'Bukti Pembayaran', 'Status Pembayaran', 'Status'];
+    $rows = ['email', 'payment_method', 'date', 'service_name', 'price', ['image', 'image'], 'status_pembayaran', 'status'];
     $dataTables = $this->listOrders->joinAll('!=', 'selesai');
     // dd($dataTables);
     $data = [
@@ -80,6 +80,8 @@ class ListOrder extends BaseController
       'modal_title' => $modal_title,
       'modal_field' => $modal_field,
       'btn_link' => $btn_link,
+      'title_up' => 'Daftar Pesanan',
+      'path_image' => 'assets/bukti_pembayaran/',
       'delete_msg' => $delete_msg,
     ];
     return view('admin/riwayat', $data);
@@ -89,10 +91,10 @@ class ListOrder extends BaseController
   private function redirect_back($msg, $fail = false)
   {
     if ($fail) {
-      session()->setFlashdata('message', ['Failed to ' . $msg . ' Riwayat', 'danger']);
+      session()->setFlashdata('message', ['Gagal untuk ' . $msg . ' pesanan', 'danger']);
       return redirect()->to(base_url('/list-order'));
     } else {
-      session()->setFlashdata('message', ['Riwayat successfully ' . $msg, 'success']);
+      session()->setFlashdata('message', ['Daftar pesanan berhasil ' . $msg, 'success']);
       return redirect()->to(base_url('/list-order'));
     }
   }
@@ -129,16 +131,16 @@ class ListOrder extends BaseController
   {
     $id = $this->request->getPost('id');
     if (!$this->form_data()) {
-      return $this->redirect_back('update', 'fail');
+      return $this->redirect_back('ubah', 'fail');
     }
     $this->listOrders->update($id, $this->form_data());
-    return $this->redirect_back('updated');
+    return $this->redirect_back('diubah');
   }
 
   public function delete()
   {
     $id = $this->request->getPost('id');
     $this->listOrders->where('id', $id)->delete();
-    return $this->redirect_back('deleted');
+    return $this->redirect_back('dihapus');
   }
 }

@@ -69,7 +69,7 @@
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-block create-account">Send OTP</button>
+            <button type="submit" class="btn btn-block create-account">Kirim OTP</button>
           </div>
 
         <?php

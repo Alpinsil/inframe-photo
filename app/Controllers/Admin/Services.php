@@ -27,24 +27,25 @@ class Services extends BaseController
     // $btn_link = '/edit-services';
     $btn_link = false;
     $modal_title = [
-      'tambah' => 'Tambah Services',
-      'edit' => 'Edit Services',
-      'delete' => 'Delete Services',
+      'tambah' => 'Tambah Katalog',
+      'edit' => 'Ubah Katalog',
+      'delete' => 'Hapus Katalog',
     ];
-    $delete_msg = 'Are You sure Want To Delete This Services ?';
+    $delete_msg = 'Apakah kamu yakin ingin menghapus katalog ini ?';
     $modal_field = [
       [
         'name' => 'name',
+        'title' => 'nama'
       ],
-      ['name' => 'price'],
-      ['name' => 'list_service', 'type' => 'textarea'],
-      ['name' => 'image', 'type' => 'file']
+      ['name' => 'price', 'title' => 'harga'],
+      ['name' => 'list_service', 'type' => 'textarea', 'title' => 'daftar layanan'],
+      ['name' => 'image', 'type' => 'file', 'title' => 'gambar']
     ];
-    $cols = ['name', 'price', 'list_service', 'image'];
+    $cols = ['nama', 'harga', 'Daftar layanan', 'gambar'];
     $rows = ['name', 'price', 'list_service', ['image', 'image']];
     $dataTables = $this->services->findAll();
     $data = [
-      'title' => 'Services Page',
+      'title' => 'Halaman Katalog',
       'cols' => $cols,
       'rows' => $rows,
       'dataTables' => $dataTables,
@@ -52,7 +53,8 @@ class Services extends BaseController
       'modal_field' => $modal_field,
       'btn_link' => $btn_link,
       'delete_msg' => $delete_msg,
-      'path_image' => 'assets/services/'
+      'path_image' => 'assets/services/',
+      'title_up' => 'Katalog'
     ];
     return view('admin/services/index', $data);
   }
@@ -61,10 +63,10 @@ class Services extends BaseController
   private function redirect_back($msg, $fail = false)
   {
     if ($fail) {
-      session()->setFlashdata('message', ['Failed to ' . $msg . ' Services', 'danger']);
+      session()->setFlashdata('message', ['Gagal untuk ' . $msg . ' katalog', 'danger']);
       return redirect()->to(base_url('/services'));
     } else {
-      session()->setFlashdata('message', ['Services successfully ' . $msg, 'success']);
+      session()->setFlashdata('message', ['Katalog berhasil ' . $msg, 'success']);
       return redirect()->to(base_url('/services'));
     }
   }
@@ -80,13 +82,23 @@ class Services extends BaseController
     $imageName = $image->getRandomName();
     $path = $this->request->getPost('path');
 
-    $rules =  [
-      'name' => 'required|max_length[255]',
-      'price' => 'required',
-      'list_service' => 'required',
-    ];
+    if ($type == 'create') {
+      $rules =  [
+        'name' => 'required|max_length[255]',
+        'price' => 'required',
+        'list_service' => 'required',
+        // 'image' => 'required',
+      ];
+    } else {
+      $rules =  [
+        'name' => 'required|max_length[255]',
+        'price' => 'required',
+        'list_service' => 'required',
+      ];
+    }
 
     if (!$this->validate($rules)) {
+      dd('sini');
       return false;
     }
 
@@ -121,9 +133,9 @@ class Services extends BaseController
   public function create()
   {
     if (!$this->form_data()) {
-      return $this->redirect_back('create', 'fail');
+      return $this->redirect_back('dibuat', 'fail');
     }
-    return $this->redirect_back('created');
+    return $this->redirect_back('dibuat');
   }
 
 
@@ -136,10 +148,10 @@ class Services extends BaseController
   {
     $id = $this->request->getPost('id');
     if (!$this->form_data($id)) {
-      return $this->redirect_back('update', 'fail');
+      return $this->redirect_back('diubah', 'fail');
     }
     // $this->services->update($id, $this->form_data());
-    return $this->redirect_back('updated');
+    return $this->redirect_back('diubah');
   }
 
   public function delete()
@@ -148,6 +160,6 @@ class Services extends BaseController
     $id = $this->request->getPost('id');
     $this->listOrdersModel->where('service_id', $id)->delete();
     $this->services->where('id', $id)->delete();
-    return $this->redirect_back('deleted');
+    return $this->redirect_back('dihapus');
   }
 }

@@ -22,17 +22,18 @@ class Faq extends BaseController
     $btn_link = false;
     $modal_title = [
       'tambah' => 'Tambah FAQ',
-      'edit' => 'Edit FAQ',
-      'delete' => 'Delete FAQ',
+      'edit' => 'ubah FAQ',
+      'delete' => 'hapus FAQ',
     ];
-    $delete_msg = 'Are You sure Want To Delete This FAQ ?';
+    $delete_msg = 'Apakah kamu yakin ingin menghapus FAQ ?';
     $modal_field = [
       [
         'name' => 'question',
+        'title' => 'pertanyaan'
       ],
-      ['name' => 'answer']
+      ['name' => 'answer', 'title' => 'jawaban']
     ];
-    $cols = ['question', 'answer'];
+    $cols = ['pertanyaan', 'jawaban'];
     $rows = ['question', 'answer'];
     $dataTables = $this->faq->findAll();
     $data = [
@@ -52,10 +53,10 @@ class Faq extends BaseController
   private function redirect_back($msg, $fail = false)
   {
     if ($fail) {
-      session()->setFlashdata('message', ['Failed to ' . $msg . ' FAQ', 'danger']);
+      session()->setFlashdata('message', ['Gagal untuk ' . $msg . ' FAQ', 'danger']);
       return redirect()->to(base_url('/faq-admin'));
     } else {
-      session()->setFlashdata('message', ['Faq successfully ' . $msg, 'success']);
+      session()->setFlashdata('message', ['FAQ berhasil ' . $msg, 'success']);
       return redirect()->to(base_url('/faq-admin'));
     }
   }
@@ -81,26 +82,26 @@ class Faq extends BaseController
   public function create()
   {
     if (!$this->form_data()) {
-      return $this->redirect_back('create', 'fail');
+      return $this->redirect_back('membuat', 'fail');
     }
     $this->faq->save($this->form_data());
-    return $this->redirect_back('created');
+    return $this->redirect_back('membuat');
   }
 
   public function update()
   {
     $id = $this->request->getPost('id');
     if (!$this->form_data()) {
-      return $this->redirect_back('update', 'fail');
+      return $this->redirect_back('diubah', 'fail');
     }
     $this->faq->update($id, $this->form_data());
-    return $this->redirect_back('updated');
+    return $this->redirect_back('diubah');
   }
 
   public function delete()
   {
     $id = $this->request->getPost('id');
     $this->faq->where('id', $id)->delete();
-    return $this->redirect_back('deleted');
+    return $this->redirect_back('dihapus');
   }
 }

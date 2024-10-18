@@ -21,7 +21,7 @@ class Auth extends BaseController
 
   public function register(): string
   {
-    $input_fields = [['name', 'text'], ['email', 'email'], ['password', 'password'], ['password2', 'password'], ['phone', 'text'], ['alamat', 'text']];
+    $input_fields = [['name', 'text', 'nama'], ['email', 'email', 'email'], ['password', 'password', 'kata sandi'], ['password2', 'password', 'konfirmasi kata sandi'], ['phone', 'text', 'no hp'], ['alamat', 'text', 'alamat']];
     return view('auth/register', ['title' => 'Register Form', 'input_fields' => $input_fields]);
   }
 

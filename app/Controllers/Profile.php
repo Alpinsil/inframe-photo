@@ -61,10 +61,10 @@ class Profile extends BaseController
   private function redirect_back($msg, $fail = false)
   {
     if ($fail) {
-      session()->setFlashdata('message', ['Failed to ' . $msg . ' Profile', 'danger']);
+      session()->setFlashdata('message', ['Gagal untuk ' . $msg . ' Profil', 'danger']);
       return redirect()->to(base_url('/profile'));
     } else {
-      session()->setFlashdata('message', ['Profile successfully ' . $msg, 'success']);
+      session()->setFlashdata('message', ['Data akun berhasil ' . $msg, 'success']);
       return redirect()->to(base_url('/profile'));
     }
   }
@@ -73,13 +73,13 @@ class Profile extends BaseController
   {
     $id = $this->request->getPost('id');
     if (!$this->form_data()) {
-      return $this->redirect_back('update', 'fail');
+      return $this->redirect_back('diubah', 'fail');
     }
 
     session()->set('user_name', $this->form_data()['name']);
 
 
     $this->users->update($id, $this->form_data());
-    return $this->redirect_back('updated');
+    return $this->redirect_back('diubah');
   }
 }

@@ -25,14 +25,14 @@ class Riwayat extends BaseController
       // 'edit' => 'Edit listOrders',
       // 'delete' => 'Delete listOrders',
     ];
-    $delete_msg = 'Are You sure Want To Delete This Order ?';
+    $delete_msg = 'Apakah kamu yakin ingin menghapus riwayat ini ?';
     $modal_field = [
       [
         'name' => 'user_id',
       ],
     ];
 
-    $cols = ['email', 'payment method', 'date', 'riwayat', 'price'];
+    $cols = ['email', 'metode pembayaran', 'tanggal', 'riwayat', 'harga'];
     $rows = ['email', 'payment_method', 'date', 'service_name', 'price'];
     $dataTables = $this->listOrders->joinAll('=', 'selesai');
     // dd($dataTables);

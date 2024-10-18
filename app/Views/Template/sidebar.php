@@ -1,9 +1,9 @@
 <?php
 if (session()->get('role') == 'admin') {
   $data = [
-    ['name' => 'Kelola Admin', 'icon' => 'ni ni-tv-2 text-primary', 'link' => 'kelola-admin'],
-    ['name' => 'List Order', 'icon' => 'ni ni-calendar-grid-58 text-warning', 'link' => 'list-order'],
-    ['name' => 'Services', 'icon' => 'ni ni-single-copy-04 text-primary', 'link' => 'services'],
+    // ['name' => 'Kelola Admin', 'icon' => 'ni ni-tv-2 text-primary', 'link' => 'kelola-admin'],
+    ['name' => 'Daftar Pesanan', 'icon' => 'ni ni-calendar-grid-58 text-warning', 'link' => 'list-order'],
+    ['name' => 'Katalog', 'icon' => 'ni ni-single-copy-04 text-primary', 'link' => 'services'],
     ['name' => 'Metode Pembayaran', 'icon' => 'fa-solid fa-dollar-sign text-success', 'link' => 'payment-methods'],
     ['name' => 'FAQ', 'icon' => 'fa-solid fa-circle-question text-primary', 'link' => 'faq-admin'],
     ['name' => 'Tags', 'icon' => 'fa-solid fa-tag text-warning', 'link' => 'tags-admin'],
@@ -15,7 +15,7 @@ if (session()->get('role') == 'admin') {
   $data = [
     ['name' => 'Kelola Admin', 'icon' => 'ni ni-tv-2 text-primary', 'link' => 'dashboard'],
     ['name' => 'Chat', 'icon' => 'fa-solid fa-comments text-success', 'link' => 'chat-guest'],
-    ['name' => 'Daftar Pesanan', 'icon' => 'ni ni-calendar-grid-58 text-warning', 'link' => 'list-orders-guest'],
+    ['name' => 'Riwayat Pesanan', 'icon' => 'ni ni-calendar-grid-58 text-warning', 'link' => 'list-orders-guest'],
   ];
 }
 ?>
@@ -69,7 +69,7 @@ if (session()->get('role') == 'admin') {
     <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
       <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="/" target="_blank">
+        <a class="navbar-brand m-0" href="/">
           <img src="assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
           <span class="ms-1 font-weight-bold">Dashboard</span>
         </a>
@@ -111,10 +111,10 @@ if (session()->get('role') == 'admin') {
         <div class="container-fluid py-1 px-3">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-              <li class="breadcrumb-item text-sm text-white active" aria-current="page"><?= ucfirst(str_replace('-', ' ', uri_string())); ?></li>
+              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Halaman</a></li>
+              <li class="breadcrumb-item text-sm text-white active" aria-current="page"><?= $title_up ?? ucfirst(str_replace('-', ' ', uri_string())); ?></li>
             </ol>
-            <h6 class="font-weight-bolder text-white mb-0"><?= ucfirst(str_replace('-', ' ', uri_string())); ?></h6>
+            <h6 class="font-weight-bolder text-white mb-0"><?= $title_up ??  ucfirst(str_replace('-', ' ', uri_string())); ?></h6>
           </nav>
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -176,10 +176,10 @@ if (session()->get('role') == 'admin') {
         <div class="container-fluid py-1 px-3">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-              <li class="breadcrumb-item text-sm text-white active" aria-current="page"><?= ucfirst(str_replace('-', ' ', uri_string())); ?></li>
+              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Halaman</a></li>
+              <li class="breadcrumb-item text-sm text-white active" aria-current="page"><?= $title_up ?? ucfirst(str_replace('-', ' ', uri_string())); ?></li>
             </ol>
-            <h6 class="font-weight-bolder text-white mb-0"><?= ucfirst(str_replace('-', ' ', uri_string())); ?></h6>
+            <h6 class="font-weight-bolder text-white mb-0"><?= $title_up ?? ucfirst(str_replace('-', ' ', uri_string())); ?></h6>
           </nav>
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -221,7 +221,7 @@ if (session()->get('role') == 'admin') {
 
                   <li class="mb-2">
                     <a class="dropdown-item border-radius-md" href="/list-orders-guest">
-                      Daftar Pesanan
+                      Riwayat Pesanan
                     </a>
                   </li>
 

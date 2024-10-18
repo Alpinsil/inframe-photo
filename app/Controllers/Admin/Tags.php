@@ -22,17 +22,17 @@ class Tags extends BaseController
     $btn_link = false;
     $modal_title = [
       'tambah' => 'Tambah tags',
-      'edit' => 'Edit tags',
-      'delete' => 'Delete tags',
+      'edit' => 'Ubah tags',
+      'delete' => 'Hapus tags',
     ];
-    $delete_msg = 'Are You sure Want To Delete This tags ?';
+    $delete_msg = 'Apakah kamu yakin ingin menghapus tag ini ?';
     $modal_field = [
       [
         'name' => 'slug',
       ],
-      ['name' => 'name']
+      ['name' => 'name', 'title' => 'nama']
     ];
-    $cols = ['slug', 'name'];
+    $cols = ['slug', 'nama'];
     $rows = ['slug', 'name'];
     $dataTables = $this->tags->findAll();
     $data = [
@@ -52,10 +52,10 @@ class Tags extends BaseController
   private function redirect_back($msg, $fail = false)
   {
     if ($fail) {
-      session()->setFlashdata('message', ['Failed to ' . $msg . ' tags', 'danger']);
+      session()->setFlashdata('message', ['Gagal untuk ' . $msg . ' tag', 'danger']);
       return redirect()->to(base_url('/tags-admin'));
     } else {
-      session()->setFlashdata('message', ['tags successfully ' . $msg, 'success']);
+      session()->setFlashdata('message', ['tag berhasil ' . $msg, 'success']);
       return redirect()->to(base_url('/tags-admin'));
     }
   }
@@ -81,26 +81,26 @@ class Tags extends BaseController
   public function create()
   {
     if (!$this->form_data()) {
-      return $this->redirect_back('create', 'fail');
+      return $this->redirect_back('membuat', 'fail');
     }
     $this->tags->save($this->form_data());
-    return $this->redirect_back('created');
+    return $this->redirect_back('membuat');
   }
 
   public function update()
   {
     $id = $this->request->getPost('id');
     if (!$this->form_data()) {
-      return $this->redirect_back('update', 'fail');
+      return $this->redirect_back('diubah', 'fail');
     }
     $this->tags->update($id, $this->form_data());
-    return $this->redirect_back('updated');
+    return $this->redirect_back('diubah');
   }
 
   public function delete()
   {
     $id = $this->request->getPost('id');
     $this->tags->where('id', $id)->delete();
-    return $this->redirect_back('deleted');
+    return $this->redirect_back('dihapus');
   }
 }

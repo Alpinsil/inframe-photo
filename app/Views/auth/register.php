@@ -22,7 +22,7 @@
       <?php
       foreach ($input_fields as $key) { ?>
         <div class="form-group">
-          <input type="<?= $key[1] ?>" class="form-control item <?= validation_show_error($key[0]) ? 'is-invalid' : ''; ?>" name="<?= $key[0] ?>" id="<?= $key[0] ?>" placeholder="<?= $key[0] == 'password2' ? 'Confirm Password' : ucwords($key[0]) ?>" value="<?= old($key[0]) ?>">
+          <input type="<?= $key[1] ?>" class="form-control item <?= validation_show_error($key[0]) ? 'is-invalid' : ''; ?>" name="<?= $key[0] ?>" id="<?= $key[0] ?>" placeholder="<?= ucwords($key[2]) ?>" value="<?= old($key[0]) ?>">
           <div class="invalid-feedback ml-3">
             <?= validation_show_error($key[0]); ?>
           </div>

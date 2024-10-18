@@ -25,7 +25,7 @@ class ListOrder extends BaseController
     $btn_link = false;
     $modal_title = [
       // 'tambah' => 'Tambah listOrders',  
-      'edit' => 'Upload Bukti Pembayaran',
+      // 'edit' => 'Upload Bukti Pembayaran',
       // 'delete' => 'Delete listOrders',
     ];
     $delete_msg = 'Are You sure Want To Delete This Order ?';
@@ -67,7 +67,7 @@ class ListOrder extends BaseController
       ['name' => 'image', 'type' => 'file'],
     ];
 
-    $cols = ['email', 'payment method', 'date', 'Paket', 'price', 'Bukti  ', 'Status Pembayaran', 'Status'];
+    $cols = ['email', 'Metode Pembayaran', 'date', 'Paket', 'harga', 'Bukti', 'Status Pembayaran', 'Status'];
     $rows = ['email', 'payment_method', 'date', 'service_name', 'price', ['image', 'image'], 'status_pembayaran', 'status'];
     $dataTables = $this->listOrders->joinAllGuest('!=', 'selesai', session()->get('user_id'));
     // dd($dataTables);
@@ -80,9 +80,10 @@ class ListOrder extends BaseController
       'modal_field' => $modal_field,
       'btn_link' => $btn_link,
       'delete_msg' => $delete_msg,
-      'path_image' => 'assets/bukti_pembayaran/'
+      'path_image' => 'assets/bukti_pembayaran/',
+      'title_up' => 'Riwayat pesanan pelanggan'
     ];
-    return view('admin/riwayat', $data);
+    return view('list-order-guest', $data);
   }
 
 

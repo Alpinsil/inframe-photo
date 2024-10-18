@@ -12,6 +12,9 @@ class Dashboard extends BaseController
     if (session()->get('role') != 'admin') {
       return redirect()->to(base_url('/'));
     }
+
+    return redirect()->to(base_url('/list-order'));
+
     $data = ['title' => 'Dashboard Page'];
     return view('admin/dashboard', $data);
     dd(uri_string());

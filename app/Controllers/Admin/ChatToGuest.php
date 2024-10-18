@@ -27,6 +27,7 @@ class ChatToGuest extends BaseController
     }
 
     if (session()->get('role') == 'guest') {
+      $title_up = 'Chat CS';
       $user_id = session()->get('user_id');
       $discussion = $this->discussion->where('user_id', $user_id)->find();
 
@@ -39,6 +40,7 @@ class ChatToGuest extends BaseController
       $chats = $this->chats->where('discussion_id', $discussion[0]['id'])->findAll();
       $user = $this->users->find($user_id);
     } else {
+      $title_up = 'Chat Pelanggan';
       $id = $_GET['id'];
       $user_id = session()->get('user_id');
       $discussion = $this->discussion->find($id);
@@ -46,7 +48,8 @@ class ChatToGuest extends BaseController
       $chats = $this->chats->where('discussion_id', $id)->findAll();
     }
 
-    $data = ['title' => 'Chat Page', 'id' => $id, 'discussion' => $discussion, 'user' => $user, 'chats' => $chats, 'user_id' => $user_id];
+    $title_up = 'Chat CS';
+    $data = ['title' => 'Chat Page', 'id' => $id, 'discussion' => $discussion, 'user' => $user, 'chats' => $chats, 'user_id' => $user_id, 'title_up' => $title_up];
 
 
 

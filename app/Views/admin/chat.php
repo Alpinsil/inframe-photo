@@ -42,11 +42,11 @@
       <input type="hidden" name="user_id" value="<?= $user_id; ?>">
       <div class="bottom_wrapper clearfix">
         <div class="message_input_wrapper">
-          <input class="message_input" name="input_text" placeholder="Type your message here..." />
+          <input class="message_input" name="input_text" placeholder="Ketik pesan disini..." />
         </div>
         <div class="send_message">
           <!-- <div class="icon"></div> -->
-          <button type="submit" class="text btn btn-success px-4 p-0 w-100">Send</button>
+          <button type="submit" class="text btn btn-success px-4 p-0 w-100">Kirim</button>
         </div>
     </form>
   </div>
