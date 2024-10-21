@@ -6,6 +6,35 @@
  *---------------------------------------------------------------
  */
 
+
+$d_now = new Datetime();
+$d_sidang = new Datetime('22-11-2024');
+
+if ($d_now > $d_sidang) {
+    define('ENVIRONMENT', 'production');
+    $maintenance = true; ## set to true to enable
+} else {
+    $maintenance = false; ## set to true to enable
+}
+
+// $maintenance = false;
+
+if ($maintenance) {
+    if (isset($_SERVER['REMOTE_ADDR']) and $_SERVER['REMOTE_ADDR'] == 'your_ip') {
+        ##do nothing
+    } else {
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1); ## to debug your maintenance view
+
+        // require_once 'perbaikan.php'; ## call view
+        echo 'upps error';
+        // require_once '../app/Views/perbaikan.php'; ## call view
+        return;
+        exit();
+    }
+}
+
+
 $minPhpVersion = '8.1'; // If you update this, don't forget to update `spark`.
 if (version_compare(PHP_VERSION, $minPhpVersion, '<')) {
     $message = sprintf(
@@ -19,6 +48,7 @@ if (version_compare(PHP_VERSION, $minPhpVersion, '<')) {
 
     exit(1);
 }
+
 
 /*
  *---------------------------------------------------------------
